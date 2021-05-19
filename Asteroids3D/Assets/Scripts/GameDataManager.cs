@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Mathematics;
 
 public class GameDataManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GameDataManager : MonoBehaviour
     // Player prefab.
     public GameObject playerPrefab;
     public GameObject missilePrefab;
+
+    // Player output
+    public quaternion playerRotation { get; set; }
 
     private void Awake()
     {
@@ -20,5 +24,12 @@ public class GameDataManager : MonoBehaviour
         {
             singleton = this;
         }
+
+        playerRotation = quaternion.identity;
+    }
+
+    private void Update()
+    {
+        print(playerRotation);
     }
 }
