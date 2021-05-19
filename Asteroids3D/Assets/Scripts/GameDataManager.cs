@@ -7,6 +7,7 @@ public class GameDataManager : MonoBehaviour
 
     // Player prefab.
     public GameObject playerPrefab;
+    public GameObject missilePrefab;
 
     private void Awake()
     {
