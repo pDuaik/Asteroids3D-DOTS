@@ -11,6 +11,7 @@ public class ECSManager : MonoBehaviour
 
     // Scenario variables.
     public int numberOfAsteroids = 1000;
+    public float3 asteroidSize = float3.zero;
     public int areaSize = 512;
 
     private void Start()
@@ -41,6 +42,7 @@ public class ECSManager : MonoBehaviour
                                                          UnityEngine.Random.Range(0.0f, 360.0f)
                                                          );
             manager.SetComponentData(asteroidInstance, new Rotation { Value = randomRotation });
+            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = asteroidSize });
         }
     }
 }
