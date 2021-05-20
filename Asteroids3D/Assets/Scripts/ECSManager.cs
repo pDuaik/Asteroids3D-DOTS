@@ -6,7 +6,6 @@ using UnityEngine;
 public class ECSManager : MonoBehaviour
 {
     // Prefabs to convert into Entities.
-    public GameObject playerPrefab;
     public GameObject missilePrefab;
     public GameObject asteroidPrefab;
 
@@ -26,13 +25,22 @@ public class ECSManager : MonoBehaviour
         // Populate the world with Asteroids.
         for (int i = 0; i < numberOfAsteroids; i++)
         {
+            // Instantiate Entity.
             Entity asteroidInstance = manager.Instantiate(asteroidEntity);
+
+            // Position
             float3 randomPosition = new float3(UnityEngine.Random.Range(-areaSize, areaSize),
                                                UnityEngine.Random.Range(-areaSize, areaSize),
                                                UnityEngine.Random.Range(-areaSize, areaSize)
                                                );
             manager.SetComponentData(asteroidInstance, new Translation { Value = randomPosition });
-            manager.SetComponentData(asteroidInstance, new Rotation { Value = quaternion.identity });
+
+            // Rotation
+            quaternion randomRotation = quaternion.Euler(UnityEngine.Random.Range(0.0f, 360.0f), 
+                                                         UnityEngine.Random.Range(0.0f, 360.0f),
+                                                         UnityEngine.Random.Range(0.0f, 360.0f)
+                                                         );
+            manager.SetComponentData(asteroidInstance, new Rotation { Value = randomRotation });
         }
     }
 }

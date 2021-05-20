@@ -201,13 +201,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643117593}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 25, z: 0}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 15, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!45 &643117597
 Skybox:
   m_ObjectHideFlags: 0
@@ -288,9 +288,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1667798341329711223, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667798341329711223, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 1.6291
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667798341329711223, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.28
+      objectReference: {fileID: 0}
     - target: {fileID: 7137113747991702883, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
       propertyPath: m_Name
       value: Player_Fighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206964674386833807, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206964674386833807, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
@@ -430,7 +450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a4d9eff7faf324aa30bf0923f06d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7137113747991702883, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
   missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
   asteroidPrefab: {fileID: 6995301307847179669, guid: 21553e62233888c46960aba242d968c9, type: 3}
   numberOfAsteroids: 2000
