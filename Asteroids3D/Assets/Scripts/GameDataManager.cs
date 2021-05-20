@@ -1,17 +1,9 @@
 using UnityEngine;
-using Unity.Mathematics;
 
 public class GameDataManager : MonoBehaviour
 {
     // Allow DOTS to access the Data Manager.
     public static GameDataManager singleton;
-
-    // Player prefab.
-    public GameObject playerPrefab;
-    public GameObject missilePrefab;
-
-    // Player output
-    public quaternion playerRotation { get; set; }
 
     private void Awake()
     {
@@ -24,12 +16,5 @@ public class GameDataManager : MonoBehaviour
         {
             singleton = this;
         }
-
-        playerRotation = quaternion.identity;
-    }
-
-    private void Update()
-    {
-        print(playerRotation);
     }
 }
