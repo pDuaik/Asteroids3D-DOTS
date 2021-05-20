@@ -18,9 +18,13 @@ public class MoveSystem : JobComponentSystem
             .WithName("MoveSystem")
             .ForEach((ref Translation position, ref Rotation rotation, ref PlayerData playerData) =>
             {
+                // Set rotation
                 rotation.Value = math.mul(rotation.Value, quaternion.AxisAngle(new float3(0, 0, -1), playerData.rotationSpeed * horizontal * deltaTime));
                 rotation.Value = math.mul(rotation.Value, quaternion.AxisAngle(new float3(1, 0, 0), playerData.rotationSpeed * vertical * deltaTime));
-                position.Value += thrust ? math.mul(rotation.Value, new float3(0, 0, 1) * playerData.acceleration * deltaTime) : float3.zero;
+
+                // Set velocity
+                playerData.currentVelocity += thrust ? math.mul(rotation.Value, new float3(0, 0, 1) * playerData.acceleration * deltaTime) : float3.zero;
+                position.Value += playerData.currentVelocity;
             })
             .Schedule(inputDeps);
 

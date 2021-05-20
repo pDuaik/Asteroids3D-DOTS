@@ -178,6 +178,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5680596650987802804, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680596650987802804, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: acceleration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680596650987802804, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+      propertyPath: rotationSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7137113747991702883, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
       propertyPath: m_Name
       value: Player_Fighter
