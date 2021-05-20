@@ -25,6 +25,10 @@ public class FollowEntity : MonoBehaviour
         }
 
         Translation entPos = manager.GetComponentData<Translation>(entityToFollow);
-        transform.position = entPos.Value + offset;
+        Rotation entRot = manager.GetComponentData<Rotation>(entityToFollow);
+        transform.rotation = entRot.Value;
+        float3 forward = math.mul(entRot.Value, new float3(0, 0, 1));
+        float3 up = math.mul(entRot.Value, new float3(0, 1, 0));
+        transform.position = entPos.Value - forward * 10 + up * 2;
     }
 }
