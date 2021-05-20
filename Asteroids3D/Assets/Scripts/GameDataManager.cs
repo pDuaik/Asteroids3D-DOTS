@@ -9,12 +9,8 @@ public class GameDataManager : MonoBehaviour
     {
         // Make sure there is only one instance of the class.
         if (singleton != null && singleton != this)
-        {
             Destroy(gameObject);
-        }
         else
-        {
             singleton = this;
-        }
     }
 }

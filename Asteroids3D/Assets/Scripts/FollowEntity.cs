@@ -7,6 +7,7 @@ public class FollowEntity : MonoBehaviour
 {
     public Entity entityToFollow;
     public float3 offset = new float3(0, 0, 0);
+    public float3 cameraEuler = new float3(0, 0, 0);
 
     private EntityManager manager;
 
@@ -20,16 +21,19 @@ public class FollowEntity : MonoBehaviour
     {
         // Prevent update in case of missing entity.
         if (entityToFollow == null)
-        {
             return;
-        }
 
+        // Get desired components.
         Translation entPos = manager.GetComponentData<Translation>(entityToFollow);
         Rotation entRot = manager.GetComponentData<Rotation>(entityToFollow);
+
+        // Rotate camera.
         transform.rotation = entRot.Value;
-        transform.Rotate(new Vector3(10, 0, 0));
+        transform.Rotate(cameraEuler);
+
+        // Position camera.
         float3 forward = math.mul(entRot.Value, new float3(0, 0, 1));
         float3 up = math.mul(entRot.Value, new float3(0, 1, 0));
-        transform.position = entPos.Value - forward * 40 + up * 15;
+        transform.position = entPos.Value + forward * offset.z + up * offset.y;
     }
 }
