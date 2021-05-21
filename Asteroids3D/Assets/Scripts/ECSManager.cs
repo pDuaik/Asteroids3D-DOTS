@@ -38,9 +38,11 @@ public class ECSManager : MonoBehaviour
             {
                 asteroidAxisRotation = UnityEngine.Random.onUnitSphere,
                 asteroidSpeedRotation = UnityEngine.Random.Range(GameDataManager.singleton.asteroidRotationSpeedRange.x,
-                                                                 GameDataManager.singleton.asteroidRotationSpeedRange.y)
-            }
-            );
+                                                                 GameDataManager.singleton.asteroidRotationSpeedRange.y),
+                asteroidDirection = UnityEngine.Random.onUnitSphere,
+                asteroidSpeed = UnityEngine.Random.Range(GameDataManager.singleton.asteroidSpeed.x,
+                                                         GameDataManager.singleton.asteroidSpeed.y),
+            });
             manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = GameDataManager.singleton.asteroidSize });
             manager.AddComponentData(asteroidInstance, new HyperspaceJumpData { isPlayer = false });
         }

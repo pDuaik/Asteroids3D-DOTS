@@ -17,6 +17,7 @@ public class GameDataManager : MonoBehaviour
     public float canvasSize = 512;
     public int numberOfAsteroids = 1000;
     public float2 asteroidRotationSpeedRange = float2.zero;
+    public float2 asteroidSpeed = float2.zero;
     public float3 asteroidSize = float3.zero;
 
     private void Awake()

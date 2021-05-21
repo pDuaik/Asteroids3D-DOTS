@@ -14,10 +14,13 @@ public class AsteroidsMovementSystem : JobComponentSystem
             .WithName("AsteroidsMovementSystem")
             .ForEach((ref Translation position, ref Rotation rotation, ref AsteroidData asteroidData) =>
             {
+                // Rotation
                 rotation.Value = math.mul(rotation.Value,
                                           quaternion.AxisAngle(asteroidData.asteroidAxisRotation,
                                                                asteroidData.asteroidSpeedRotation * deltaTime)
                                           );
+                // Position
+                position.Value += asteroidData.asteroidDirection * asteroidData.asteroidSpeed * deltaTime;
             })
             .Schedule(inputDeps);
 
