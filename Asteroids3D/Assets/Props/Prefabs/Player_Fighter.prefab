@@ -9701,6 +9701,7 @@ GameObject:
   - component: {fileID: 5680596650987802804}
   - component: {fileID: -6033879519071860225}
   - component: {fileID: 1418020483}
+  - component: {fileID: 5396035009936513690}
   m_Layer: 0
   m_Name: Player_Fighter
   m_TagString: Untagged
@@ -9737,8 +9738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749504e6f3daeb344a1d581c5318d6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
-  speed: 10
+  rotationSpeed: 1
+  acceleration: 0.5
 --- !u!114 &-6033879519071860225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9765,3 +9766,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConversionMode: 0
+--- !u!114 &5396035009936513690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137113747991702883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df6917ee0c45b14c9a18020648412b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

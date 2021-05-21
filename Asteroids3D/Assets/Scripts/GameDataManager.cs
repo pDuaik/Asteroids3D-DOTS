@@ -1,9 +1,22 @@
 using UnityEngine;
+using Unity.Mathematics;
 
 public class GameDataManager : MonoBehaviour
 {
     // Allow DOTS to access the Data Manager.
     public static GameDataManager singleton;
+
+    //MainCamera
+    public Transform mainCamera;
+
+    // Prefabs to convert into Entities.
+    public GameObject missilePrefab;
+    public GameObject asteroidPrefab;
+
+    // Canvas variables
+    public float canvasSize = 512;
+    public int numberOfAsteroids = 1000;
+    public float3 asteroidSize = float3.zero;
 
     private void Awake()
     {

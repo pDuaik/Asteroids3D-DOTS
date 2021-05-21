@@ -5,15 +5,6 @@ using UnityEngine;
 
 public class ECSManager : MonoBehaviour
 {
-    // Prefabs to convert into Entities.
-    public GameObject missilePrefab;
-    public GameObject asteroidPrefab;
-
-    // Scenario variables.
-    public int numberOfAsteroids = 1000;
-    public float3 asteroidSize = float3.zero;
-    public int areaSize = 512;
-
     private void Start()
     {
         // Initialize manager using world default.
@@ -21,28 +12,30 @@ public class ECSManager : MonoBehaviour
         var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
 
         // Convert prefabs into entity.
-        var asteroidEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(asteroidPrefab, settings);
+        var asteroidEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.asteroidPrefab, settings);
 
         // Populate the world with Asteroids.
-        for (int i = 0; i < numberOfAsteroids; i++)
+        for (int i = 0; i < GameDataManager.singleton.numberOfAsteroids; i++)
         {
             // Instantiate Entity.
             Entity asteroidInstance = manager.Instantiate(asteroidEntity);
 
             // Position
-            float3 randomPosition = new float3(UnityEngine.Random.Range(-areaSize, areaSize),
-                                               UnityEngine.Random.Range(-areaSize, areaSize),
-                                               UnityEngine.Random.Range(-areaSize, areaSize)
+            float canvasSize = GameDataManager.singleton.canvasSize;
+            float3 randomPosition = new float3(UnityEngine.Random.Range(-canvasSize, canvasSize),
+                                               UnityEngine.Random.Range(-canvasSize, canvasSize),
+                                               UnityEngine.Random.Range(-canvasSize, canvasSize)
                                                );
             manager.SetComponentData(asteroidInstance, new Translation { Value = randomPosition });
 
             // Rotation
-            quaternion randomRotation = quaternion.Euler(UnityEngine.Random.Range(0.0f, 360.0f), 
+            quaternion randomRotation = quaternion.Euler(UnityEngine.Random.Range(0.0f, 360.0f),
                                                          UnityEngine.Random.Range(0.0f, 360.0f),
                                                          UnityEngine.Random.Range(0.0f, 360.0f)
                                                          );
             manager.SetComponentData(asteroidInstance, new Rotation { Value = randomRotation });
-            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = asteroidSize });
+            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = GameDataManager.singleton.asteroidSize });
+            manager.AddComponentData(asteroidInstance, new HyperspaceJumpData { isPlayer = false });
         }
     }
 }

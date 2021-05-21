@@ -14,6 +14,9 @@ public class PlayerMovementSystem : JobComponentSystem
         float vertical = UnityEngine.Input.GetAxis("Vertical");
         bool thrust = UnityEngine.Input.GetKey("left shift");
 
+        // GameDataManager variables
+        float canvasSize = GameDataManager.singleton.canvasSize;
+
         JobHandle jobHandle = Entities
             .WithName("PlayerMovementSystem")
             .ForEach((ref Translation position, ref Rotation rotation, ref PlayerData playerData) =>
