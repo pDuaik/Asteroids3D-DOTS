@@ -40,13 +40,13 @@ public class ECSManager : MonoBehaviour
             manager.SetComponentData(asteroidInstance, new AsteroidData
             {
                 asteroidAxisRotation = UnityEngine.Random.onUnitSphere,
-                asteroidSpeedRotation = UnityEngine.Random.Range(GameDataManager.singleton.asteroidRotationSpeedRange.x,
-                                                                 GameDataManager.singleton.asteroidRotationSpeedRange.y),
+                asteroidSpeedRotation = UnityEngine.Random.Range(GameDataManager.singleton.asteroidRandomRotationSpeedMinMax.x,
+                                                                 GameDataManager.singleton.asteroidRandomRotationSpeedMinMax.y),
                 asteroidDirection = UnityEngine.Random.onUnitSphere,
-                asteroidSpeed = UnityEngine.Random.Range(GameDataManager.singleton.asteroidSpeed.x,
-                                                         GameDataManager.singleton.asteroidSpeed.y),
+                asteroidSpeed = UnityEngine.Random.Range(GameDataManager.singleton.asteroidRandomSpeedMinMax.x,
+                                                         GameDataManager.singleton.asteroidRandomSpeedMinMax.y),
             });
-            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = GameDataManager.singleton.asteroidSize });
+            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.asteroidSize });
             manager.AddComponentData(asteroidInstance, new HyperspaceJumpData { isPlayer = false });
 
             // Populate entity array;

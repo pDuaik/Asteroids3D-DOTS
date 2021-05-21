@@ -22,7 +22,7 @@ public class PlayerMovementSystem : JobComponentSystem
         bool collision = false;
         foreach (var item in GameDataManager.singleton.asteroids)
         {
-            if (math.distancesq(EntityManager.GetComponentData<Translation>(item).Value, GameDataManager.singleton.playerPosition) < math.pow(200, 2))
+            if (math.distancesq(EntityManager.GetComponentData<Translation>(item).Value, GameDataManager.singleton.playerPosition) < math.pow(GameDataManager.singleton.asteroidSize, 2))
             {
                 collision = true;
             }
