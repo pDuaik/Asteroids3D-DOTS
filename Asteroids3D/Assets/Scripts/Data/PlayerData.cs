@@ -9,5 +9,5 @@ public struct PlayerData : IComponentData
     public float acceleration;
 
     public float3 currentVelocity { get; set; }
-    //public Entity Missile { get; set; }
+    public Entity Missile { get; set; }
 }

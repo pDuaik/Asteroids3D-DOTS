@@ -4,7 +4,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine.Jobs;
 
-public class MoveSystem : JobComponentSystem
+public class PlayerMovementSystem : JobComponentSystem
 {
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
@@ -15,7 +15,7 @@ public class MoveSystem : JobComponentSystem
         bool thrust = UnityEngine.Input.GetKey("left shift");
 
         JobHandle jobHandle = Entities
-            .WithName("MoveSystem")
+            .WithName("PlayerMovementSystem")
             .ForEach((ref Translation position, ref Rotation rotation, ref PlayerData playerData) =>
             {
                 // Set rotation
