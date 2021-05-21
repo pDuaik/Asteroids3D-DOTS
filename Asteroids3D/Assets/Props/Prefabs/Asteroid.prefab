@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4026936164502494380}
   - component: {fileID: 3313183129963321560}
   - component: {fileID: 8504673893874801672}
+  - component: {fileID: 554107975015494276}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -81,3 +82,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &554107975015494276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995301307847179669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2d45e102518de04b971996dccc703a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

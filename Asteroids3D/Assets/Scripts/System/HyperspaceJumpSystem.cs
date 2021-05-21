@@ -29,8 +29,10 @@ public class HyperspaceJumpSystem : JobComponentSystem
                     if (math.abs(cameraPosition.z) >= playerArea)
                         position.Value.z -= canvasSize / 2 * math.sign(position.Value.z);
                 }
+                // Asteroids Hyperspace Jump
                 else
                 {
+                    // Move asteroids with player.
                     if (cameraPosition.x > playerArea)
                         position.Value.x -= canvasSize / 2;
                     else if (cameraPosition.x < -playerArea)
@@ -46,6 +48,7 @@ public class HyperspaceJumpSystem : JobComponentSystem
                     else if (cameraPosition.z < -playerArea)
                         position.Value.z += canvasSize / 2;
 
+                    // Check which asteroid is outside play area.
                     if (position.Value.x < -canvasSize)
                         position.Value.x += canvasSize * 2;
                     else if (position.Value.x > canvasSize)
@@ -60,7 +63,6 @@ public class HyperspaceJumpSystem : JobComponentSystem
                         position.Value.z += canvasSize * 2;
                     else if (position.Value.z > canvasSize)
                         position.Value.z -= canvasSize * 2;
-
                 }
             })
             .Schedule(inputDeps);
