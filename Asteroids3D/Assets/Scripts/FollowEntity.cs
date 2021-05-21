@@ -35,5 +35,8 @@ public class FollowEntity : MonoBehaviour
         float3 forward = math.mul(entRot.Value, new float3(0, 0, 1));
         float3 up = math.mul(entRot.Value, new float3(0, 1, 0));
         transform.position = entPos.Value + forward * offset.z + up * offset.y;
+
+        // Pass to GameDataManager player position
+        GameDataManager.singleton.playerPosition = entPos.Value;
     }
 }

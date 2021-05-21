@@ -14,6 +14,9 @@ public class ECSManager : MonoBehaviour
         // Convert prefabs into entity.
         var asteroidEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.asteroidPrefab, settings);
 
+        // Create a list of Asteroids as entities.
+        GameDataManager.singleton.asteroids = new Entity[GameDataManager.singleton.numberOfAsteroids];
+
         // Populate the world with Asteroids.
         for (int i = 0; i < GameDataManager.singleton.numberOfAsteroids; i++)
         {
@@ -45,6 +48,9 @@ public class ECSManager : MonoBehaviour
             });
             manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = GameDataManager.singleton.asteroidSize });
             manager.AddComponentData(asteroidInstance, new HyperspaceJumpData { isPlayer = false });
+
+            // Populate entity array;
+            GameDataManager.singleton.asteroids[i] = asteroidInstance;
         }
     }
 }

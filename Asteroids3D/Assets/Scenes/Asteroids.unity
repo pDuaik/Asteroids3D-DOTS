@@ -156,14 +156,17 @@ MonoBehaviour:
   missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
   asteroidPrefab: {fileID: 6995301307847179669, guid: 21553e62233888c46960aba242d968c9, type: 3}
   canvasSize: 4096
-  numberOfAsteroids: 2000
+  numberOfAsteroids: 1000
   asteroidRotationSpeedRange:
     x: 0.1
     y: 1
+  asteroidSpeed:
+    x: 10
+    y: 20
   asteroidSize:
-    x: 50
-    y: 50
-    z: 45
+    x: 100
+    y: 100
+    z: 100
 --- !u!4 &391731513
 Transform:
   m_ObjectHideFlags: 0

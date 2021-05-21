@@ -1,13 +1,21 @@
 using UnityEngine;
 using Unity.Mathematics;
+using Unity.Entities;
 
 public class GameDataManager : MonoBehaviour
 {
     // Allow DOTS to access the Data Manager.
     public static GameDataManager singleton;
 
+    // Asteroids Array
+    public Entity[] asteroids;
+
     //MainCamera
     public Transform mainCamera;
+
+    // Player Positon
+    // Main Camera is feeding this information.
+    public float3 playerPosition { get; set; }
 
     // Prefabs to convert into Entities.
     public GameObject missilePrefab;
