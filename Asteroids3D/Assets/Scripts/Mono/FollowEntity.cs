@@ -39,6 +39,7 @@ public class FollowEntity : MonoBehaviour
 
         // Pass to GameDataManager player position and Velocity
         GameDataManager.singleton.playerPosition = entPos.Value;
+        GameDataManager.singleton.playerRotation = entRot.Value;
         GameDataManager.singleton.playerVelocity = plData.currentVelocity;
     }
 }

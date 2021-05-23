@@ -10,9 +10,9 @@ public class GameDataManager : MonoBehaviour
     //MainCamera
     public Transform mainCamera;
 
-    // Player Positon
     // Main Camera is feeding this information.
     public float3 playerPosition { get; set; }
+    public quaternion playerRotation { get; set; }
     public float3 playerVelocity { get; set; }
 
     // Prefabs to convert into Entities.

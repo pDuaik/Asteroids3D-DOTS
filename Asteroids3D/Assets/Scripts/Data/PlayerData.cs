@@ -8,7 +8,6 @@ public struct PlayerData : IComponentData
     public float rotationSpeed;
     public float acceleration;
 
+    public float3 currentThrust { get; set; }
     public float3 currentVelocity { get; set; }
-    public Entity Missile { get; set; }
-    public bool collision { get; set; }
 }

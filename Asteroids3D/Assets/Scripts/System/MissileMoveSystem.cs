@@ -13,6 +13,8 @@ public class MissileMoveSystem : JobComponentSystem
         bool shoot = UnityEngine.Input.GetKeyDown("space");
         float3 playerVelocity = GameDataManager.singleton.playerVelocity;
         float3 playerPosition = GameDataManager.singleton.playerPosition;
+        quaternion playerRotation = GameDataManager.singleton.playerRotation;
+        float missileSpeed = GameDataManager.singleton.missileSpeed;
 
         if (shoot)
         {
@@ -20,7 +22,7 @@ public class MissileMoveSystem : JobComponentSystem
             {
                 if (!EntityManager.GetComponentData<MissileData>(item).isActive)
                 {
-                    EntityManager.SetComponentData(item, new MissileData { awake = true });
+                    EntityManager.SetComponentData(item, new MissileData { awake = true, lifeSpan = GameDataManager.singleton.missileLifeSpan, currentLifeSpan = 0 });
                     break;
                 }
             }
@@ -30,12 +32,6 @@ public class MissileMoveSystem : JobComponentSystem
             .WithName("MissileMoveSystem")
             .ForEach((ref Translation position, ref Rotation rotation, ref MissileData missileData) =>
             {
-                // Move all missiles
-                if (missileData.isActive)
-                {
-                    position.Value += missileData.initialVector * 2 * deltaTime;
-                }
-
                 // Awake missile if player is shooting
                 if (missileData.awake)
                 {
@@ -43,6 +39,27 @@ public class MissileMoveSystem : JobComponentSystem
                     missileData.isActive = true;
                     missileData.initialVector = playerVelocity;
                     position.Value = playerPosition;
+                }
+
+                // Move all missiles
+                if (missileData.isActive)
+                {
+                    if (missileData.currentLifeSpan >= missileData.lifeSpan)
+                    {
+                        position.Value = new float3(0, 800000, 0);
+                        rotation.Value = quaternion.identity;
+                        missileData.awake = false;
+                        missileData.isActive = false;
+                        missileData.initialVector = float3.zero;
+                        missileData.currentLifeSpan = 0;
+                    }
+                    else
+                    {
+                        float3 missileForward = math.mul(rotation.Value, new float3(0, 0, 1) * missileSpeed * deltaTime);
+                        position.Value += missileData.initialVector + missileForward;
+                        rotation.Value = playerRotation;
+                        missileData.currentLifeSpan += deltaTime;
+                    }
                 }
             })
             .Schedule(inputDeps);

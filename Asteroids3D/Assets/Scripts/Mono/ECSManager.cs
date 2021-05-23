@@ -95,7 +95,7 @@ public class ECSManager : MonoBehaviour
             manager.AddComponentData(missileInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.missileSize });
 
             // Missile Data
-            manager.SetComponentData(missileInstance, new MissileData { lifeSpan = GameDataManager.singleton.missileLifeSpan });
+            manager.SetComponentData(missileInstance, new MissileData { });
 
             // Populate entity array;
             GameDataManager.singleton.missiles[i] = missileInstance;

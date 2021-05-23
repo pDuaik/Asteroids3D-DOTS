@@ -35,7 +35,7 @@ public class PlayerMovementSystem : JobComponentSystem
                 {
                     rotation.Value = quaternion.identity;
                     position.Value = float3.zero;
-                    playerData.currentVelocity = float3.zero;
+                    playerData.currentThrust = float3.zero;
                 }
                 else
                 {
@@ -43,9 +43,11 @@ public class PlayerMovementSystem : JobComponentSystem
                     rotation.Value = math.mul(rotation.Value, quaternion.AxisAngle(new float3(0, 0, -1), playerData.rotationSpeed * horizontal * deltaTime));
                     rotation.Value = math.mul(rotation.Value, quaternion.AxisAngle(new float3(1, 0, 0), playerData.rotationSpeed * vertical * deltaTime));
 
-                    // Set velocity
-                    playerData.currentVelocity += thrust ? math.mul(rotation.Value, new float3(0, 0, 1) * playerData.acceleration * deltaTime) : float3.zero;
-                    position.Value += playerData.currentVelocity;
+                    // Set Position and Velocity
+                    playerData.currentThrust += thrust ? math.mul(rotation.Value, new float3(0, 0, 1) * playerData.acceleration * deltaTime) : float3.zero;
+                    playerData.currentVelocity = position.Value;
+                    position.Value += playerData.currentThrust;
+                    playerData.currentVelocity = position.Value - playerData.currentVelocity;
                 }
 
             })
