@@ -35,6 +35,16 @@ public class GameDataManager : MonoBehaviour
     public float missileSpeed = 30;
     public float missileSize = 2;
     public float missileLifeSpan = 5;
+    public float cooldown = 1;
+    public float currentCooldown { get; set; }
+
+    // Power-ups
+    public bool shield = false;
+    public bool triple = false;
+
+    // Shield logic
+    public float shieldTimer = 5;
+    private float currentShieldTimer = 0;
 
     private void Awake()
     {
@@ -43,5 +53,16 @@ public class GameDataManager : MonoBehaviour
             Destroy(gameObject);
         else
             singleton = this;
+    }
+
+    private void Update()
+    {
+        currentCooldown += Time.deltaTime;
+        currentShieldTimer += Time.deltaTime;
+        if (currentShieldTimer >= shieldTimer)
+        {
+            currentShieldTimer -= shieldTimer;
+            shield = !shield;
+        }
     }
 }

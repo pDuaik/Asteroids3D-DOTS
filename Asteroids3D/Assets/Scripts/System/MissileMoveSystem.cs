@@ -17,8 +17,9 @@ public class MissileMoveSystem : JobComponentSystem
         float missileSpeed = GameDataManager.singleton.missileSpeed;
 
         // Turn on missiles if player is shooting.
-        if (shoot)
+        if (shoot && GameDataManager.singleton.currentCooldown >= GameDataManager.singleton.cooldown)
         {
+            GameDataManager.singleton.currentCooldown = 0;
             foreach (var item in GameDataManager.singleton.missiles)
             {
                 if (!EntityManager.GetComponentData<MissileData>(item).isActive)
@@ -30,19 +31,17 @@ public class MissileMoveSystem : JobComponentSystem
         }
 
         // Check collision.
-        bool collision = false;
         foreach (var missile in GameDataManager.singleton.missiles)
         {
-            if (EntityManager.GetComponentData<MissileData>(missile).isActive)
+            if (EntityManager.GetComponentData<MissileData>(missile).isActive && !EntityManager.GetComponentData<CollisionData>(missile).collision)
             {
-                foreach (var ateroid in GameDataManager.singleton.asteroids)
+                foreach (var asteroid in GameDataManager.singleton.asteroids)
                 {
-                    if (math.distancesq(EntityManager.GetComponentData<Translation>(ateroid).Value, EntityManager.GetComponentData<Translation>(missile).Value) < math.pow(GameDataManager.singleton.asteroidSize, 2))
+                    float comparisonValue = math.pow(EntityManager.GetComponentData<ShatterData>(asteroid).smallAsteroid ? GameDataManager.singleton.asteroidSize / 4 : GameDataManager.singleton.asteroidSize, 2);
+                    if (math.distancesq(EntityManager.GetComponentData<Translation>(asteroid).Value, EntityManager.GetComponentData<Translation>(missile).Value) < comparisonValue)
                     {
-                        EntityManager.SetComponentData(ateroid, new CollisionData { collision = true });
-                        collision = true;
-
-                        break;
+                        EntityManager.SetComponentData(asteroid, new CollisionData { collision = true });
+                        EntityManager.SetComponentData(missile, new CollisionData { collision = true });
                     }
                 }
             }
@@ -50,7 +49,7 @@ public class MissileMoveSystem : JobComponentSystem
 
         JobHandle jobHandle = Entities
             .WithName("MissileMoveSystem")
-            .ForEach((ref Translation position, ref Rotation rotation, ref MissileData missileData) =>
+            .ForEach((ref Translation position, ref Rotation rotation, ref MissileData missileData, ref CollisionData collisionData) =>
             {
                 // Awake missile if player is shooting
                 if (missileData.awake)
@@ -64,7 +63,7 @@ public class MissileMoveSystem : JobComponentSystem
                 // Move all missiles
                 if (missileData.isActive)
                 {
-                    if (missileData.currentLifeSpan >= missileData.lifeSpan || collision)
+                    if (missileData.currentLifeSpan >= missileData.lifeSpan || collisionData.collision)
                     {
                         position.Value = new float3(0, 800000, 0);
                         rotation.Value = quaternion.identity;
@@ -72,6 +71,7 @@ public class MissileMoveSystem : JobComponentSystem
                         missileData.isActive = false;
                         missileData.initialVector = float3.zero;
                         missileData.currentLifeSpan = 0;
+                        collisionData.collision = false;
                     }
                     else
                     {

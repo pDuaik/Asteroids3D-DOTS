@@ -16,12 +16,15 @@ public class PlayerMovementSystem : JobComponentSystem
 
         // GameDataManager variables
         float canvasSize = GameDataManager.singleton.canvasSize;
+        bool shield = GameDataManager.singleton.shield;
 
         // Check collision and move asteroid from collision place.
         bool collision = false;
         foreach (var item in GameDataManager.singleton.asteroids)
         {
-            if (math.distancesq(EntityManager.GetComponentData<Translation>(item).Value, GameDataManager.singleton.playerPosition) < math.pow(GameDataManager.singleton.asteroidSize, 2))
+
+            float comparisonValue = math.pow(EntityManager.GetComponentData<ShatterData>(item).smallAsteroid ? GameDataManager.singleton.asteroidSize / 4 : GameDataManager.singleton.asteroidSize, 2);
+            if (math.distancesq(EntityManager.GetComponentData<Translation>(item).Value, GameDataManager.singleton.playerPosition) < comparisonValue)
             {
                 EntityManager.SetComponentData(item, new CollisionData { collision = true });
                 collision = true;
@@ -34,7 +37,7 @@ public class PlayerMovementSystem : JobComponentSystem
             .WithName("PlayerMovementSystem")
             .ForEach((ref Translation position, ref Rotation rotation, ref PlayerData playerData) =>
             {
-                if (collision)
+                if (collision && !shield)
                 {
                     rotation.Value = quaternion.identity;
                     position.Value = float3.zero;

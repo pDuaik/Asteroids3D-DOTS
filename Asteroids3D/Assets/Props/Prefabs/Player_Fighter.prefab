@@ -9739,7 +9739,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1
-  acceleration: 0.5
+  acceleration: 5
+  powerUp: 0
 --- !u!114 &-6033879519071860225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9778,3 +9779,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df6917ee0c45b14c9a18020648412b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
+  isActive: 0

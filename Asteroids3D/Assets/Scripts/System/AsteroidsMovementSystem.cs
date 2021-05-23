@@ -9,6 +9,8 @@ public class AsteroidsMovementSystem : JobComponentSystem
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         float deltaTime = UnityEngine.Time.deltaTime;
+        float3 playerPosition = GameDataManager.singleton.playerPosition;
+        float asteroidSizeSmall = GameDataManager.singleton.asteroidSize / 4;
 
         JobHandle jobHandle = Entities
             .WithName("AsteroidsMovementSystem")
@@ -16,14 +18,26 @@ public class AsteroidsMovementSystem : JobComponentSystem
                       ref Rotation rotation,
                       ref AsteroidData asteroidData,
                       ref CollisionData collisionData,
-                      ref HyperspaceJumpData hyperspaceJumpData) =>
+                      ref ShatterData shatterData,
+                      ref HyperspaceJumpData hyperspaceJumpData,
+                      ref NonUniformScale nonUniformScale) =>
             {
                 if (collisionData.collision)
                 {
                     collisionData.collision = false;
-                    asteroidData.isActive = false;
-                    position.Value = new float3(0, 800000, 0);
-                    hyperspaceJumpData.isActive = false;
+                    if (shatterData.smallAsteroid)
+                    {
+                        asteroidData.isActive = false;
+                        position.Value = new float3(0, 800000, 0);
+                        hyperspaceJumpData.isActive = false;
+                    }
+                    else
+                    {
+                        position.Value += new float3(0, 1, 0) * 100;
+                        asteroidData.asteroidDirection = math.normalize(position.Value - playerPosition);
+                        nonUniformScale.Value = new float3(1, 1, 1) * asteroidSizeSmall;
+                        shatterData.smallAsteroid = true;
+                    }
                 }
 
                 if (asteroidData.isActive)
