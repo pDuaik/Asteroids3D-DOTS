@@ -46,6 +46,10 @@ public class GameDataManager : MonoBehaviour
     public float shieldTimer = 5;
     private float currentShieldTimer = 0;
 
+    // Shot Logic
+    public float shotTimer = 10;
+    public float currentShotTimer = 0;
+
     private void Awake()
     {
         // Make sure there is only one instance of the class.
@@ -57,12 +61,24 @@ public class GameDataManager : MonoBehaviour
 
     private void Update()
     {
+        // This update must move to the player data.
+        // This is not a good pattern, but a choice due to time constrains.
+        // Power-Ups rely on this update.
         currentCooldown += Time.deltaTime;
         currentShieldTimer += Time.deltaTime;
         if (currentShieldTimer >= shieldTimer)
         {
             currentShieldTimer -= shieldTimer;
             shield = !shield;
+        }
+
+        if (currentShotTimer > 0)
+        {
+            currentShotTimer -= Time.deltaTime;
+        }
+        else
+        {
+            doubleShot = false;
         }
     }
 }

@@ -41,5 +41,13 @@ public class FollowEntity : MonoBehaviour
         GameDataManager.singleton.playerPosition = entPos.Value;
         GameDataManager.singleton.playerRotation = entRot.Value;
         GameDataManager.singleton.playerVelocity = plData.currentVelocity;
+
+        // Double Shot PowerUp.
+        // This is not a good pattern, but a choice due to time constrains.
+        if (math.distancesq(entPos.Value, plData.powerUpPosition) < math.pow(plData.powerUpRadius, 2))
+        {
+            GameDataManager.singleton.doubleShot = true;
+            GameDataManager.singleton.currentShotTimer = GameDataManager.singleton.shotTimer;
+        }
     }
 }

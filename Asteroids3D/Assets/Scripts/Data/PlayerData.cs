@@ -8,6 +8,8 @@ public struct PlayerData : IComponentData
     public float rotationSpeed;
     public float acceleration;
     public bool doubleShot;
+    public float3 powerUpPosition;
+    public float powerUpRadius;
 
     public float3 currentThrust { get; set; }
     public float3 currentVelocity { get; set; }
