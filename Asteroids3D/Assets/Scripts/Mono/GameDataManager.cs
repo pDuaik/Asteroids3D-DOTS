@@ -40,7 +40,7 @@ public class GameDataManager : MonoBehaviour
 
     // Power-ups
     public bool shield = false;
-    public bool triple = false;
+    public bool doubleShot = false;
 
     // Shield logic
     public float shieldTimer = 5;

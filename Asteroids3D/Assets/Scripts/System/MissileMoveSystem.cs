@@ -15,17 +15,38 @@ public class MissileMoveSystem : JobComponentSystem
         float3 playerPosition = GameDataManager.singleton.playerPosition;
         quaternion playerRotation = GameDataManager.singleton.playerRotation;
         float missileSpeed = GameDataManager.singleton.missileSpeed;
+        bool doubleShot = GameDataManager.singleton.doubleShot;
 
         // Turn on missiles if player is shooting.
         if (shoot && GameDataManager.singleton.currentCooldown >= GameDataManager.singleton.cooldown)
         {
             GameDataManager.singleton.currentCooldown = 0;
-            foreach (var item in GameDataManager.singleton.missiles)
+            if (doubleShot)
             {
-                if (!EntityManager.GetComponentData<MissileData>(item).isActive)
+                int count = 0;
+                foreach (var item in GameDataManager.singleton.missiles)
                 {
-                    EntityManager.SetComponentData(item, new MissileData { awake = true, lifeSpan = GameDataManager.singleton.missileLifeSpan, currentLifeSpan = 0 });
-                    break;
+                    if (!EntityManager.GetComponentData<MissileData>(item).isActive)
+                    {
+                        EntityManager.SetComponentData(item, new MissileData { awake = true, lifeSpan = GameDataManager.singleton.missileLifeSpan, currentLifeSpan = 0, doubleShot = count == 1 ? true : false });
+                        count++;
+
+                        if (count >= 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in GameDataManager.singleton.missiles)
+                {
+                    if (!EntityManager.GetComponentData<MissileData>(item).isActive)
+                    {
+                        EntityManager.SetComponentData(item, new MissileData { awake = true, lifeSpan = GameDataManager.singleton.missileLifeSpan, currentLifeSpan = 0 });
+                        break;
+                    }
                 }
             }
         }
@@ -57,7 +78,14 @@ public class MissileMoveSystem : JobComponentSystem
                     missileData.awake = false;
                     missileData.isActive = true;
                     missileData.initialVector = playerVelocity;
-                    position.Value = playerPosition;
+                    if (missileData.doubleShot)
+                    {
+                        position.Value = playerPosition + math.mul(playerRotation, new float3(5, 0, 0));
+                    }
+                    else
+                    {
+                        position.Value = playerPosition;
+                    }
                 }
 
                 // Move all missiles

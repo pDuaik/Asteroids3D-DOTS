@@ -16,7 +16,7 @@ public class ECSManager : MonoBehaviour
         var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.missilePrefab, settings);
 
         // Transform prefabs into entities.
-        GameDataManager.singleton.asteroids = new Entity[GameDataManager.singleton.numberOfAsteroids * 2];
+        GameDataManager.singleton.asteroids = new Entity[GameDataManager.singleton.numberOfAsteroids];
         GameDataManager.singleton.missiles = new Entity[GameDataManager.singleton.numberOfMissiles];
 
         PopulateAsteroids(manager, asteroidEntity);
@@ -31,32 +31,23 @@ public class ECSManager : MonoBehaviour
     /// <param name="asteroidEntity"></param>
     private static void PopulateAsteroids(EntityManager manager, Entity asteroidEntity)
     {
-        for (int i = 0; i < GameDataManager.singleton.numberOfAsteroids * 2; i++)
+        for (int i = 0; i < GameDataManager.singleton.numberOfAsteroids; i++)
         {
             // Instantiate Entity.
             Entity asteroidInstance = manager.Instantiate(asteroidEntity);
 
-            // Half of the asteroids will stay in the canvas.
-            // The other half to move when we destroy asteroids.
-            if (i < GameDataManager.singleton.numberOfAsteroids)
+            // Position
+            float canvasSize = GameDataManager.singleton.canvasSize;
+            float3 randomPosition = float3.zero;
+            // Prevent asteroid to awake overlaping player.
+            while (math.distancesq(randomPosition, float3.zero) < math.pow(60, 2))
             {
-                // Position
-                float canvasSize = GameDataManager.singleton.canvasSize;
-                float3 randomPosition = float3.zero;
-                // Prevent asteroid to awake overlaping player.
-                while (math.distancesq(randomPosition, float3.zero) < math.pow(40, 2))
-                {
-                    randomPosition = new float3(UnityEngine.Random.Range(-canvasSize, canvasSize),
-                                                   UnityEngine.Random.Range(-canvasSize, canvasSize),
-                                                   UnityEngine.Random.Range(-canvasSize, canvasSize)
-                                                   );
-                }
-                manager.SetComponentData(asteroidInstance, new Translation { Value = randomPosition });
+                randomPosition = new float3(UnityEngine.Random.Range(-canvasSize, canvasSize),
+                                               UnityEngine.Random.Range(-canvasSize, canvasSize),
+                                               UnityEngine.Random.Range(-canvasSize, canvasSize)
+                                               );
             }
-            else
-            {
-                manager.SetComponentData(asteroidInstance, new Translation { Value = new float3(0, 800000, 0) });
-            }
+            manager.SetComponentData(asteroidInstance, new Translation { Value = randomPosition });
 
             // Rotation
             quaternion randomRotation = quaternion.Euler(UnityEngine.Random.Range(0.0f, 360.0f),
@@ -81,14 +72,7 @@ public class ECSManager : MonoBehaviour
             manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.asteroidSize });
 
             // Hyperspace Jump
-            if (i < GameDataManager.singleton.numberOfAsteroids)
-            {
-                manager.SetComponentData(asteroidInstance, new HyperspaceJumpData { isActive = true });
-            }
-            else
-            {
-                manager.SetComponentData(asteroidInstance, new HyperspaceJumpData { });
-            }
+            manager.SetComponentData(asteroidInstance, new HyperspaceJumpData { isActive = true });
 
             // Populate entity array;
             GameDataManager.singleton.asteroids[i] = asteroidInstance;
