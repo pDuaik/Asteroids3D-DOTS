@@ -17,13 +17,16 @@ public class PlayerMovementSystem : JobComponentSystem
         // GameDataManager variables
         float canvasSize = GameDataManager.singleton.canvasSize;
 
-        // Check collision
+        // Check collision and move asteroid from collision place.
         bool collision = false;
         foreach (var item in GameDataManager.singleton.asteroids)
         {
             if (math.distancesq(EntityManager.GetComponentData<Translation>(item).Value, GameDataManager.singleton.playerPosition) < math.pow(GameDataManager.singleton.asteroidSize, 2))
             {
+                EntityManager.SetComponentData(item, new CollisionData { collision = true });
                 collision = true;
+
+                break;
             }
         }
 

@@ -12,8 +12,20 @@ public class AsteroidsMovementSystem : JobComponentSystem
 
         JobHandle jobHandle = Entities
             .WithName("AsteroidsMovementSystem")
-            .ForEach((ref Translation position, ref Rotation rotation, ref AsteroidData asteroidData) =>
+            .ForEach((ref Translation position,
+                      ref Rotation rotation,
+                      ref AsteroidData asteroidData,
+                      ref CollisionData collisionData,
+                      ref HyperspaceJumpData hyperspaceJumpData) =>
             {
+                if (collisionData.collision)
+                {
+                    collisionData.collision = false;
+                    asteroidData.isActive = false;
+                    position.Value = new float3(0, 800000, 0);
+                    hyperspaceJumpData.isActive = false;
+                }
+
                 if (asteroidData.isActive)
                 {
                     // Rotation

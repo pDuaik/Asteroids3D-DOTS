@@ -29,7 +29,24 @@ public class MissileMoveSystem : JobComponentSystem
             }
         }
 
-        // Check for collisions.
+        // Check collision.
+        bool collision = false;
+        foreach (var missile in GameDataManager.singleton.missiles)
+        {
+            if (EntityManager.GetComponentData<MissileData>(missile).isActive)
+            {
+                foreach (var ateroid in GameDataManager.singleton.asteroids)
+                {
+                    if (math.distancesq(EntityManager.GetComponentData<Translation>(ateroid).Value, EntityManager.GetComponentData<Translation>(missile).Value) < math.pow(GameDataManager.singleton.asteroidSize, 2))
+                    {
+                        EntityManager.SetComponentData(ateroid, new CollisionData { collision = true });
+                        collision = true;
+
+                        break;
+                    }
+                }
+            }
+        }
 
         JobHandle jobHandle = Entities
             .WithName("MissileMoveSystem")
@@ -47,7 +64,7 @@ public class MissileMoveSystem : JobComponentSystem
                 // Move all missiles
                 if (missileData.isActive)
                 {
-                    if (missileData.currentLifeSpan >= missileData.lifeSpan)
+                    if (missileData.currentLifeSpan >= missileData.lifeSpan || collision)
                     {
                         position.Value = new float3(0, 800000, 0);
                         rotation.Value = quaternion.identity;

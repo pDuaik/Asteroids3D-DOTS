@@ -83,11 +83,11 @@ public class ECSManager : MonoBehaviour
             // Hyperspace Jump
             if (i < GameDataManager.singleton.numberOfAsteroids)
             {
-                manager.AddComponentData(asteroidInstance, new HyperspaceJumpData { isActive = true });
+                manager.SetComponentData(asteroidInstance, new HyperspaceJumpData { isActive = true });
             }
             else
             {
-                manager.AddComponentData(asteroidInstance, new HyperspaceJumpData { });
+                manager.SetComponentData(asteroidInstance, new HyperspaceJumpData { });
             }
 
             // Populate entity array;
