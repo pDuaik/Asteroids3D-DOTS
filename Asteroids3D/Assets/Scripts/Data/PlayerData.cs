@@ -7,6 +7,7 @@ public struct PlayerData : IComponentData
     // Gameplay variables
     public float rotationSpeed;
     public float acceleration;
+    public bool powerUp;
 
     public float3 currentThrust { get; set; }
     public float3 currentVelocity { get; set; }

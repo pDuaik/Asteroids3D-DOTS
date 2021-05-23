@@ -30,7 +30,7 @@ public class HyperspaceJumpSystem : JobComponentSystem
                         position.Value.z -= canvasSize / 2 * math.sign(position.Value.z);
                 }
                 // Asteroids Hyperspace Jump
-                else
+                else if (hyperspaceJumpData.isActive)
                 {
                     // Move asteroids with player.
                     if (cameraPosition.x > playerArea)

@@ -165,9 +165,9 @@ MonoBehaviour:
     y: 10
   asteroidSize: 300
   numberOfMissiles: 200
-  MissileSpeed: 30
+  missileSpeed: 100
   missileSize: 1
-  lifeSpan: 5
+  missileLifeSpan: 5
 --- !u!4 &391731513
 Transform:
   m_ObjectHideFlags: 0

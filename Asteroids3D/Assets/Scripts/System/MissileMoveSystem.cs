@@ -16,6 +16,7 @@ public class MissileMoveSystem : JobComponentSystem
         quaternion playerRotation = GameDataManager.singleton.playerRotation;
         float missileSpeed = GameDataManager.singleton.missileSpeed;
 
+        // Turn on missiles if player is shooting.
         if (shoot)
         {
             foreach (var item in GameDataManager.singleton.missiles)
@@ -27,6 +28,8 @@ public class MissileMoveSystem : JobComponentSystem
                 }
             }
         }
+
+        // Check for collisions.
 
         JobHandle jobHandle = Entities
             .WithName("MissileMoveSystem")

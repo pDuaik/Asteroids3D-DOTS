@@ -8,4 +8,5 @@ public struct AsteroidData : IComponentData
     public float asteroidSpeedRotation { get; set; }
     public float3 asteroidDirection { get; set; }
     public float asteroidSpeed { get; set; }
+    public bool isActive { get; set; }
 }
