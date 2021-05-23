@@ -155,15 +155,19 @@ MonoBehaviour:
   mainCamera: {fileID: 643117596}
   missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
   asteroidPrefab: {fileID: 6995301307847179669, guid: 21553e62233888c46960aba242d968c9, type: 3}
-  canvasSize: 4096
-  numberOfAsteroids: 1000
+  canvasSize: 8192
+  numberOfAsteroids: 1600
   asteroidRandomRotationSpeedMinMax:
     x: 0.1
     y: 1
   asteroidRandomSpeedMinMax:
     x: 5
     y: 10
-  asteroidSize: 200
+  asteroidSize: 300
+  numberOfMissiles: 200
+  MissileSpeed: 30
+  missileSize: 1
+  lifeSpan: 5
 --- !u!4 &391731513
 Transform:
   m_ObjectHideFlags: 0
@@ -299,7 +303,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 2048
+  far clip plane: 4096
   field of view: 60
   orthographic: 0
   orthographic size: 5

@@ -1,4 +1,3 @@
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
@@ -30,7 +29,6 @@ public class PlayerMovementSystem : JobComponentSystem
 
         JobHandle jobHandle = Entities
             .WithName("PlayerMovementSystem")
-            .WithoutBurst()
             .ForEach((ref Translation position, ref Rotation rotation, ref PlayerData playerData) =>
             {
                 if (collision)

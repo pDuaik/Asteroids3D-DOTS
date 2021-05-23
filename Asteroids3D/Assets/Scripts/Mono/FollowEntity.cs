@@ -26,6 +26,7 @@ public class FollowEntity : MonoBehaviour
         // Get desired components.
         Translation entPos = manager.GetComponentData<Translation>(entityToFollow);
         Rotation entRot = manager.GetComponentData<Rotation>(entityToFollow);
+        PlayerData plData = manager.GetComponentData<PlayerData>(entityToFollow);
 
         // Rotate camera.
         transform.rotation = entRot.Value;
@@ -36,7 +37,8 @@ public class FollowEntity : MonoBehaviour
         float3 up = math.mul(entRot.Value, new float3(0, 1, 0));
         transform.position = entPos.Value + forward * offset.z + up * offset.y;
 
-        // Pass to GameDataManager player position
+        // Pass to GameDataManager player position and Velocity
         GameDataManager.singleton.playerPosition = entPos.Value;
+        GameDataManager.singleton.playerVelocity = plData.currentVelocity;
     }
 }
