@@ -33,7 +33,13 @@ public class MissileMoveSystem : JobComponentSystem
                 {
                     if (!EntityManager.GetComponentData<MissileData>(item).isActive)
                     {
-                        EntityManager.SetComponentData(item, new MissileData { awake = true, lifeSpan = GameDataManager.singleton.missileLifeSpan, currentLifeSpan = 0, doubleShot = count == 1 ? true : false });
+                        EntityManager.SetComponentData(item, new MissileData
+                        {
+                            awake = true,
+                            lifeSpan = GameDataManager.singleton.missileLifeSpan,
+                            currentLifeSpan = 0,
+                            doubleShot = count == 1 ? true : false
+                        });
                         count++;
 
                         if (count >= 2)
@@ -49,7 +55,12 @@ public class MissileMoveSystem : JobComponentSystem
                 {
                     if (!EntityManager.GetComponentData<MissileData>(item).isActive)
                     {
-                        EntityManager.SetComponentData(item, new MissileData { awake = true, lifeSpan = GameDataManager.singleton.missileLifeSpan, currentLifeSpan = 0 });
+                        EntityManager.SetComponentData(item, new MissileData
+                        {
+                            awake = true,
+                            lifeSpan = GameDataManager.singleton.missileLifeSpan,
+                            currentLifeSpan = 0
+                        });
                         break;
                     }
                 }
@@ -75,7 +86,12 @@ public class MissileMoveSystem : JobComponentSystem
 
         JobHandle jobHandle = Entities
             .WithName("MissileMoveSystem")
-            .ForEach((ref Translation position, ref Rotation rotation, ref MissileData missileData, ref CollisionData collisionData) =>
+            .ForEach((
+                ref Translation position,
+                ref Rotation rotation,
+                ref MissileData missileData, 
+                ref CollisionData collisionData,
+                ref HyperspaceJumpData hyperspaceJumpData) =>
             {
                 // Awake missile if player is shooting
                 if (missileData.awake)
@@ -83,6 +99,7 @@ public class MissileMoveSystem : JobComponentSystem
                     missileData.awake = false;
                     missileData.isActive = true;
                     missileData.initialVector = playerVelocity;
+                    hyperspaceJumpData.isActive = true;
                     if (missileData.doubleShot)
                     {
                         position.Value = playerPosition + math.mul(playerRotation, new float3(5, 0, 0));
@@ -105,6 +122,7 @@ public class MissileMoveSystem : JobComponentSystem
                         missileData.initialVector = float3.zero;
                         missileData.currentLifeSpan = 0;
                         collisionData.collision = false;
+                        hyperspaceJumpData.isActive = false;
                     }
                     else
                     {
