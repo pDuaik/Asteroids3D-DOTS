@@ -152,10 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a28ff94961164e468ca91dea6162433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 643117596}
-  missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
-  asteroidPrefab: {fileID: 6995301307847179669, guid: 21553e62233888c46960aba242d968c9, type: 3}
-  playerPrefab: {fileID: 7137113747991702883, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
   canvasSize: 8192
   numberOfAsteroids: 1600
   asteroidRandomRotationSpeedMinMax:
@@ -295,10 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86c7c53aa8fd2047907bafcafd952af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset:
-    x: 0
-    y: 5
-    z: -40
+  offset: {x: 0, y: 5, z: -40}
 --- !u!1 &644088248
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a4d9eff7faf324aa30bf0923f06d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterTracker: {fileID: 643117598}
+  characterTracker: {fileID: 643117593}
+  asteroidPrefab: {fileID: 6995301307847179669, guid: 21553e62233888c46960aba242d968c9, type: 3}
+  missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
+  playerPrefab: {fileID: 7137113747991702883, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
 --- !u!1 &1539024651
 GameObject:
   m_ObjectHideFlags: 0
