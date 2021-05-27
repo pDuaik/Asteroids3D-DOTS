@@ -6,14 +6,19 @@ using UnityEngine.Jobs;
 
 public class MissileMoveSystem : JobComponentSystem
 {
+    Entity player;
+    protected override void OnStartRunning()
+    {
+        player = GetSingletonEntity<PlayerData>();
+    }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         // Retrieve from Engine DeltaTime and Inputs.
         float deltaTime = UnityEngine.Time.deltaTime;
         bool shoot = UnityEngine.Input.GetKeyDown("space");
-        float3 playerVelocity = GameDataManager.singleton.playerVelocity;
-        float3 playerPosition = GameDataManager.singleton.playerPosition;
-        quaternion playerRotation = GameDataManager.singleton.playerRotation;
+        float3 playerVelocity = EntityManager.GetComponentData<PlayerData>(player).currentVelocity;
+        float3 playerPosition = EntityManager.GetComponentData<Translation>(player).Value;
+        quaternion playerRotation = EntityManager.GetComponentData<Rotation>(player).Value;
         float missileSpeed = GameDataManager.singleton.missileSpeed;
         bool doubleShot = GameDataManager.singleton.doubleShot;
 

@@ -6,9 +6,14 @@ using UnityEngine.Jobs;
 
 public class HyperspaceJumpSystem : JobComponentSystem
 {
+    Entity player;
+    protected override void OnStartRunning()
+    {
+        player = GetSingletonEntity<PlayerData>();
+    }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
-        float3 cameraPosition = GameDataManager.singleton.mainCamera.position;
+        float3 cameraPosition = EntityManager.GetComponentData<Translation>(player).Value;
         float canvasSize = GameDataManager.singleton.canvasSize;
         float playerArea = canvasSize / 4;
 

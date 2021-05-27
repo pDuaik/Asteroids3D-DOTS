@@ -6,6 +6,11 @@ using UnityEngine.Jobs;
 
 public class PlayerMovementSystem : JobComponentSystem
 {
+    Entity player;
+    protected override void OnStartRunning()
+    {
+        player = GetSingletonEntity<PlayerData>();
+    }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         // Retrieve from Engine DeltaTime and Inputs.
@@ -22,9 +27,8 @@ public class PlayerMovementSystem : JobComponentSystem
         bool collision = false;
         foreach (var item in GameDataManager.singleton.asteroids)
         {
-
             float comparisonValue = math.pow(EntityManager.GetComponentData<ShatterData>(item).smallAsteroid ? GameDataManager.singleton.asteroidSize / 4 : GameDataManager.singleton.asteroidSize, 2);
-            if (math.distancesq(EntityManager.GetComponentData<Translation>(item).Value, GameDataManager.singleton.playerPosition) < comparisonValue)
+            if (math.distancesq(EntityManager.GetComponentData<Translation>(item).Value, EntityManager.GetComponentData<Translation>(player).Value) < comparisonValue)
             {
                 EntityManager.SetComponentData(item, new CollisionData { collision = true });
                 collision = true;

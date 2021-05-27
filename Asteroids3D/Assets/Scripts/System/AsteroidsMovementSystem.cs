@@ -6,10 +6,15 @@ using UnityEngine.Jobs;
 
 public class AsteroidsMovementSystem : JobComponentSystem
 {
+    Entity player;
+    protected override void OnStartRunning()
+    {
+        player = GetSingletonEntity<PlayerData>();
+    }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         float deltaTime = UnityEngine.Time.deltaTime;
-        float3 playerPosition = GameDataManager.singleton.playerPosition;
+        float3 playerPosition = EntityManager.GetComponentData<Translation>(player).Value;
         float asteroidSizeSmall = GameDataManager.singleton.asteroidSize / 4;
 
         JobHandle jobHandle = Entities

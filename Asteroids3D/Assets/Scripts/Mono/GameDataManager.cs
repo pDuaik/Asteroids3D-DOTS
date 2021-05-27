@@ -7,19 +7,6 @@ public class GameDataManager : MonoBehaviour
     // Allow DOTS to access the Data Manager.
     public static GameDataManager singleton;
 
-    //MainCamera
-    public Transform mainCamera;
-
-    // Main Camera is feeding this information.
-    public float3 playerPosition { get; set; }
-    public quaternion playerRotation { get; set; }
-    public float3 playerVelocity { get; set; }
-
-    // Prefabs to convert into Entities.
-    public GameObject missilePrefab;
-    public GameObject asteroidPrefab;
-    public GameObject playerPrefab;
-
     // Canvas variables
     public float canvasSize = 512;
 

@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class ECSManager : MonoBehaviour
 {
-    public CameraMovement characterTracker;
+    // GameObjects to initialize the game
+    public GameObject characterTracker;
+    public GameObject asteroidPrefab;
+    public GameObject missilePrefab;
+    public GameObject playerPrefab;
+
 
     private void Start()
     {
@@ -14,9 +19,9 @@ public class ECSManager : MonoBehaviour
         var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
 
         // Convert prefabs into entity.
-        var asteroidEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.asteroidPrefab, settings);
-        var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.missilePrefab, settings);
-        var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.playerPrefab, settings);
+        var asteroidEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(asteroidPrefab, settings);
+        var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(missilePrefab, settings);
+        var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, settings);
 
         // Transform prefabs into entities.
         GameDataManager.singleton.asteroids = new Entity[GameDataManager.singleton.numberOfAsteroids];
@@ -24,7 +29,7 @@ public class ECSManager : MonoBehaviour
 
         // Instantiate Player.
         Entity playerInstance = manager.Instantiate(playerEntity);
-        characterTracker.SetReceivedEntity(playerInstance);
+        characterTracker.GetComponent<CameraMovement>().SetReceivedEntity(playerInstance);
 
         PopulateAsteroids(manager, asteroidEntity);
 
