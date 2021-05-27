@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ECSManager : MonoBehaviour
 {
+    public CameraMovement characterTracker;
+
     private void Start()
     {
         // Initialize manager using world default.
@@ -14,10 +16,15 @@ public class ECSManager : MonoBehaviour
         // Convert prefabs into entity.
         var asteroidEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.asteroidPrefab, settings);
         var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.missilePrefab, settings);
+        var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(GameDataManager.singleton.playerPrefab, settings);
 
         // Transform prefabs into entities.
         GameDataManager.singleton.asteroids = new Entity[GameDataManager.singleton.numberOfAsteroids];
         GameDataManager.singleton.missiles = new Entity[GameDataManager.singleton.numberOfMissiles];
+
+        // Instantiate Player.
+        Entity playerInstance = manager.Instantiate(playerEntity);
+        characterTracker.SetReceivedEntity(playerInstance);
 
         PopulateAsteroids(manager, asteroidEntity);
 

@@ -18,6 +18,7 @@ public class GameDataManager : MonoBehaviour
     // Prefabs to convert into Entities.
     public GameObject missilePrefab;
     public GameObject asteroidPrefab;
+    public GameObject playerPrefab;
 
     // Canvas variables
     public float canvasSize = 512;
