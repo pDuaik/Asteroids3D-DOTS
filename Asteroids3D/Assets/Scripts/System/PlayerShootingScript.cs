@@ -16,7 +16,20 @@ public class PlayerShootingScript : JobComponentSystem
                 // Check if player is shooting
                 if (playerData.currentShootingCooldownTime >= playerData.shootingCooldownTime && shoot)
                 {
+                    // Initialize manager using world default.
+                    var manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+
+                    // Reset timer
                     playerData.currentShootingCooldownTime = 0;
+
+                    // Instantiate missile
+                    Entity missileInstance = manager.Instantiate(playerData.missile);
+                    manager.SetComponentData(missileInstance, new MissileData
+                    {
+                        awake = true,
+                        lifeSpan = GameDataManager.singleton.missileLifeSpan,
+                        currentLifeSpan = 0,
+                    });
                 }
 
                 // Add delta time to shooting cooldown timer

@@ -23,6 +23,7 @@ public class MissileMoveSystem : JobComponentSystem
         bool doubleShot = GameDataManager.singleton.doubleShot;
 
         // Turn on missiles if player is shooting.
+        /*
         if (shoot && GameDataManager.singleton.currentCooldown >= GameDataManager.singleton.cooldown)
         {
             GameDataManager.singleton.currentCooldown = 0;
@@ -66,6 +67,7 @@ public class MissileMoveSystem : JobComponentSystem
                 }
             }
         }
+        */
 
         // Check collision.
         foreach (var missile in GameDataManager.singleton.missiles)
