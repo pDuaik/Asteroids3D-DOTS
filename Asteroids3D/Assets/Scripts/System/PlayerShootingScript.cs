@@ -4,6 +4,14 @@ using Unity.Transforms;
 
 public class PlayerShootingScript : JobComponentSystem
 {
+    EntityManager manager;
+
+    protected override void OnCreate()
+    {
+        // Initialize manager using world default.
+        manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+    }
+
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         bool shoot = UnityEngine.Input.GetKeyDown("space");
@@ -20,9 +28,6 @@ public class PlayerShootingScript : JobComponentSystem
                 // Check if player is shooting
                 if (playerData.currentShootingCooldownTime >= playerData.shootingCooldownTime && shoot)
                 {
-                    // Initialize manager using world default.
-                    var manager = World.DefaultGameObjectInjectionWorld.EntityManager;
-
                     // Reset timer
                     playerData.currentShootingCooldownTime = 0;
 
