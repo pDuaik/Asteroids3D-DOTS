@@ -1,5 +1,6 @@
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Transforms;
 
 public class PlayerShootingScript : JobComponentSystem
 {
@@ -11,7 +12,8 @@ public class PlayerShootingScript : JobComponentSystem
         Entities
             .WithoutBurst()
             .WithStructuralChanges()
-            .ForEach((ref PlayerData playerData) =>
+            .ForEach((ref PlayerData playerData,
+                      ref Rotation rotation) =>
             {
                 // Check if player is shooting
                 if (playerData.currentShootingCooldownTime >= playerData.shootingCooldownTime && shoot)
@@ -24,6 +26,7 @@ public class PlayerShootingScript : JobComponentSystem
 
                     // Instantiate missile
                     Entity missileInstance = manager.Instantiate(playerData.missile);
+                    manager.SetComponentData(missileInstance, new Rotation { Value = rotation.Value });
                     manager.SetComponentData(missileInstance, new MissileData
                     {
                         awake = true,

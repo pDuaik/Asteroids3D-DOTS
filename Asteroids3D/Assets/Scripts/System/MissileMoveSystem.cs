@@ -67,7 +67,6 @@ public class MissileMoveSystem : JobComponentSystem
                 }
             }
         }
-        */
 
         // Check collision.
         foreach (var missile in GameDataManager.singleton.missiles)
@@ -85,6 +84,7 @@ public class MissileMoveSystem : JobComponentSystem
                 }
             }
         }
+        */
 
         JobHandle jobHandle = Entities
             .WithName("MissileMoveSystem")
@@ -130,7 +130,6 @@ public class MissileMoveSystem : JobComponentSystem
                     {
                         float3 missileForward = math.mul(rotation.Value, new float3(0, 0, 1) * missileSpeed * deltaTime);
                         position.Value += missileData.initialVector + missileForward;
-                        rotation.Value = playerRotation;
                         missileData.currentLifeSpan += deltaTime;
                     }
                 }

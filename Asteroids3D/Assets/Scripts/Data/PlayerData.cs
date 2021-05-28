@@ -19,7 +19,7 @@ public struct PlayerData : IComponentData
     public float shootingCooldownTime;
 
     // Trackers:
-    //[NonSerialized]
+    [NonSerialized]
     public float currentShootingCooldownTime;
     [NonSerialized]
     public float3 currentThrust;

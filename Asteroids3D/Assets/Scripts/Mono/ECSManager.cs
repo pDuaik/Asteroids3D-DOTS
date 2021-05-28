@@ -24,9 +24,15 @@ public class ECSManager : MonoBehaviour
         var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, settings);
 
         // Transform prefabs into entities.
-        GameDataManager.singleton.asteroids = new Entity[GameDataManager.singleton.numberOfAsteroids];
         GameDataManager.singleton.missiles = new Entity[GameDataManager.singleton.numberOfMissiles];
 
+        // Instantiate
+        InstantiatePlayer(manager, missileEntity, playerEntity);
+        PopulateAsteroids(manager, asteroidEntity);
+    }
+
+    private void InstantiatePlayer(EntityManager manager, Entity missileEntity, Entity playerEntity)
+    {
         // Instantiate Player.
         Entity playerInstance = manager.Instantiate(playerEntity);
         manager.SetComponentData(playerInstance, new PlayerData
@@ -37,22 +43,13 @@ public class ECSManager : MonoBehaviour
             rotationSpeed = manager.GetComponentData<PlayerData>(playerInstance).rotationSpeed,
             powerUpPosition = manager.GetComponentData<PlayerData>(playerInstance).powerUpPosition,
             powerUpRadius = manager.GetComponentData<PlayerData>(playerInstance).powerUpRadius
-        }); 
+        });
         characterTracker.GetComponent<CameraMovement>().SetReceivedEntity(playerInstance);
 #if UNITY_EDITOR
         manager.SetName(playerInstance, "Player");
 #endif
-
-        PopulateAsteroids(manager, asteroidEntity);
-
-        PopulateMissiles(manager, missileEntity);
     }
 
-    /// <summary>
-    /// Populate the world with asteroids.
-    /// </summary>
-    /// <param name="manager"></param>
-    /// <param name="asteroidEntity"></param>
     private static void PopulateAsteroids(EntityManager manager, Entity asteroidEntity)
     {
         for (int i = 0; i < GameDataManager.singleton.numberOfAsteroids; i++)
@@ -97,38 +94,6 @@ public class ECSManager : MonoBehaviour
 
             // Hyperspace Jump
             manager.SetComponentData(asteroidInstance, new HyperspaceJumpData { isActive = true });
-
-            // Populate entity array;
-            GameDataManager.singleton.asteroids[i] = asteroidInstance;
-        }
-    }
-
-    /// <summary>
-    /// Populate the world with missiles and put them far away from action.
-    /// </summary>
-    /// <param name="manager"></param>
-    /// <param name="missileEntity"></param>
-    private static void PopulateMissiles(EntityManager manager, Entity missileEntity)
-    {
-        for (int i = 0; i < GameDataManager.singleton.numberOfMissiles; i++)
-        {
-            // Instantiate Entity.
-            Entity missileInstance = manager.Instantiate(missileEntity);
-
-            // Position
-            manager.SetComponentData(missileInstance, new Translation { Value = new float3(0, GameDataManager.singleton.canvasSize * 100, 0) });
-
-            // Rotation
-            manager.SetComponentData(missileInstance, new Rotation { Value = quaternion.identity });
-
-            // Scale
-            manager.AddComponentData(missileInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.missileSize });
-
-            // Missile Data
-            manager.SetComponentData(missileInstance, new MissileData { });
-
-            // Populate entity array;
-            GameDataManager.singleton.missiles[i] = missileInstance;
         }
     }
 }
