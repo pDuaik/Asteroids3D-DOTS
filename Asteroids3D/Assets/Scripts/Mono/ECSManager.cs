@@ -30,6 +30,9 @@ public class ECSManager : MonoBehaviour
         // Instantiate Player.
         Entity playerInstance = manager.Instantiate(playerEntity);
         characterTracker.GetComponent<CameraMovement>().SetReceivedEntity(playerInstance);
+#if UNITY_EDITOR
+        manager.SetName(playerInstance, "Player");
+#endif
 
         PopulateAsteroids(manager, asteroidEntity);
 

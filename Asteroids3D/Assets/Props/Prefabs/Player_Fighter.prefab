@@ -9744,6 +9744,8 @@ MonoBehaviour:
     y: 566
     z: 700
   powerUpRadius: 250
+  shootingCooldownTime: 1
+  currentShootingCooldownTime: 0
 --- !u!114 &5396035009936513690
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using Unity.Entities;
 using Unity.Mathematics;
+using System;
 
 [GenerateAuthoringComponent]
 public struct PlayerData : IComponentData
@@ -11,6 +12,14 @@ public struct PlayerData : IComponentData
     public float3 powerUpPosition;
     public float powerUpRadius;
 
-    public float3 currentThrust { get; set; }
-    public float3 currentVelocity { get; set; }
+    // Missile shooting cooldown
+    public float shootingCooldownTime;
+
+    // Trackers:
+    //[NonSerialized]
+    public float currentShootingCooldownTime;
+    [NonSerialized]
+    public float3 currentThrust;
+    [NonSerialized]
+    public float3 currentVelocity;
 }
