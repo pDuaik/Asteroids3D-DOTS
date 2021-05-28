@@ -34,7 +34,6 @@ public class AsteroidsMovementSystem : JobComponentSystem
                     {
                         asteroidData.isActive = false;
                         position.Value = new float3(0, 800000, 0);
-                        hyperspaceJumpData.isActive = false;
                     }
                     else
                     {

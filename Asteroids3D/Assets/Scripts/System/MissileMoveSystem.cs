@@ -101,7 +101,6 @@ public class MissileMoveSystem : JobComponentSystem
                     missileData.awake = false;
                     missileData.isActive = true;
                     missileData.initialVector = playerVelocity;
-                    hyperspaceJumpData.isActive = true;
                     if (missileData.doubleShot)
                     {
                         position.Value = playerPosition + math.mul(playerRotation, new float3(5, 0, 0));
@@ -124,7 +123,6 @@ public class MissileMoveSystem : JobComponentSystem
                         missileData.initialVector = float3.zero;
                         missileData.currentLifeSpan = 0;
                         collisionData.collision = false;
-                        hyperspaceJumpData.isActive = false;
                     }
                     else
                     {

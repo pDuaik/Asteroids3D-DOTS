@@ -23,9 +23,6 @@ public class ECSManager : MonoBehaviour
         var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(missilePrefab, settings);
         var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, settings);
 
-        // Transform prefabs into entities.
-        GameDataManager.singleton.missiles = new Entity[GameDataManager.singleton.numberOfMissiles];
-
         // Instantiate
         InstantiatePlayer(manager, missileEntity, playerEntity);
         PopulateAsteroids(manager, asteroidEntity);
@@ -91,9 +88,6 @@ public class ECSManager : MonoBehaviour
 
             // Scale
             manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.asteroidSize });
-
-            // Hyperspace Jump
-            manager.SetComponentData(asteroidInstance, new HyperspaceJumpData { isActive = true });
         }
     }
 }
