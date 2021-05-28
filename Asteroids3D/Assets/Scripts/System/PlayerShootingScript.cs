@@ -8,12 +8,14 @@ public class PlayerShootingScript : JobComponentSystem
     {
         bool shoot = UnityEngine.Input.GetKeyDown("space");
         float deltaTime = UnityEngine.Time.deltaTime;
+        float missileLifeSpan = GameDataManager.singleton.missileLifeSpan;
 
         Entities
             .WithoutBurst()
             .WithStructuralChanges()
             .ForEach((ref PlayerData playerData,
-                      ref Rotation rotation) =>
+                      ref Rotation rotation,
+                      ref Translation position) =>
             {
                 // Check if player is shooting
                 if (playerData.currentShootingCooldownTime >= playerData.shootingCooldownTime && shoot)
@@ -27,11 +29,11 @@ public class PlayerShootingScript : JobComponentSystem
                     // Instantiate missile
                     Entity missileInstance = manager.Instantiate(playerData.missile);
                     manager.SetComponentData(missileInstance, new Rotation { Value = rotation.Value });
+                    manager.SetComponentData(missileInstance, new Translation { Value = position.Value });
                     manager.SetComponentData(missileInstance, new MissileData
                     {
-                        awake = true,
-                        lifeSpan = GameDataManager.singleton.missileLifeSpan,
-                        currentLifeSpan = 0,
+                        initialVector = playerData.currentVelocity,
+                        lifeSpan = missileLifeSpan,
                     });
                 }
 

@@ -18,12 +18,9 @@ public class GameDataManager : MonoBehaviour
     public float asteroidSize = 200;
 
     // Missile Variables
-    public Entity[] missiles;
-    public int numberOfMissiles = 100;
     public float missileSpeed = 30;
     public float missileSize = 2;
     public float missileLifeSpan = 5;
-    public float cooldown = 1;
     public float currentCooldown { get; set; }
 
     // Power-ups
