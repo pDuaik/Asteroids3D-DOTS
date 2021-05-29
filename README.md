@@ -7,6 +7,10 @@ SPACE -> Fire
 LEFT SHIFT -> Acceleration
 White Balls Area -> Shooting Power UP
 
+Github
+Main Branch -> Game running and working.
+Secondary Branch -> Code Review and Clean-Up. Game not necessarily working.
+
 Asteroids 3D
 The main objective is to bring the classic Asteroids game to a 3D perspective.
 Using DOTS, I tried to maintain the original movement of the starship;
