@@ -14,7 +14,7 @@ public class HyperspaceJumpSystem : JobComponentSystem
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         float3 cameraPosition = EntityManager.GetComponentData<Translation>(player).Value;
-        float canvasSize = GameDataManager.singleton.canvasSize;
+        float canvasSize = GameDataManager.singleton.canvasHalfSize;
         float playerArea = canvasSize / 4;
 
         JobHandle jobHandle = Entities

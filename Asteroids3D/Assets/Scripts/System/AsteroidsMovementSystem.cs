@@ -15,7 +15,7 @@ public class AsteroidsMovementSystem : JobComponentSystem
     {
         float deltaTime = UnityEngine.Time.deltaTime;
         float3 playerPosition = EntityManager.GetComponentData<Translation>(player).Value;
-        float asteroidSizeSmall = GameDataManager.singleton.asteroidSize / 4;
+        float asteroidSizeSmall = GameDataManager.singleton.asteroidRadius / 4;
 
         JobHandle jobHandle = Entities
             .WithName("AsteroidsMovementSystem")

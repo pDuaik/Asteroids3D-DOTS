@@ -23,14 +23,6 @@ public class ECSManager : MonoBehaviour
         var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(missilePrefab, settings);
         var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, settings);
 
-        // Calculate quadrant space size
-        int currentQuadrantSpaceSize = 1;
-        do
-        {
-            currentQuadrantSpaceSize *= 2;
-        } while (currentQuadrantSpaceSize < GameDataManager.singleton.asteroidSize * 2);
-        
-
         // Instantiate
         InstantiatePlayer(manager, missileEntity, playerEntity);
         PopulateAsteroids(manager, asteroidEntity);
@@ -63,7 +55,7 @@ public class ECSManager : MonoBehaviour
             Entity asteroidInstance = manager.Instantiate(asteroidEntity);
 
             // Position
-            float canvasSize = GameDataManager.singleton.canvasSize;
+            float canvasSize = GameDataManager.singleton.canvasHalfSize;
             float3 randomPosition = float3.zero;
             // Prevent asteroid to awake overlaping player.
             while (math.distancesq(randomPosition, float3.zero) < math.pow(60, 2))
@@ -95,7 +87,7 @@ public class ECSManager : MonoBehaviour
             });
 
             // Scale
-            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.asteroidSize });
+            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.asteroidRadius });
         }
     }
 }

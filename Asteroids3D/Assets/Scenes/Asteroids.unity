@@ -152,15 +152,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a28ff94961164e468ca91dea6162433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasSize: 8192
+  canvasHalfSize: 8192
   numberOfAsteroids: 1600
+  asteroidRadius: 256
   asteroidRandomRotationSpeedMinMax:
     x: 0.1
     y: 1
   asteroidRandomSpeedMinMax:
     x: 5
     y: 10
-  asteroidSize: 256
   missileSpeed: 100
   missileSize: 2
   missileLifeSpan: 10
