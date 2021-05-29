@@ -11,7 +11,6 @@ public class GameDataManager : MonoBehaviour
     public float canvasSize = 512;
 
     // Asteroid variables.
-    public Entity[] asteroids;
     public int numberOfAsteroids = 1000;
     public float2 asteroidRandomRotationSpeedMinMax = float2.zero;
     public float2 asteroidRandomSpeedMinMax = float2.zero;

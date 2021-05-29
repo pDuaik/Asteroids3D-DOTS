@@ -13,4 +13,8 @@ public struct MissileData : IComponentData
 
     // If it is a double shot
     public bool doubleShot;
+
+    // Quadrant Matrix
+    //[System.NonSerialized]
+    public float3 quadrantPosition;
 }

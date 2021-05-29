@@ -160,7 +160,7 @@ MonoBehaviour:
   asteroidRandomSpeedMinMax:
     x: 5
     y: 10
-  asteroidSize: 300
+  asteroidSize: 256
   missileSpeed: 100
   missileSize: 2
   missileLifeSpan: 10

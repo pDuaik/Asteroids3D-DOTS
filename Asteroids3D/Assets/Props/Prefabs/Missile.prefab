@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 1403817818686376084}
   - component: {fileID: 7171553241800144488}
   - component: {fileID: -2755191051308248345}
+  - component: {fileID: -8146754562038712570}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Untagged
@@ -127,8 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd69c8af78c0e3543996b690a4d52131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
-  awake: 0
   lifeSpan: 0
   currentLifeSpan: 0
   initialVector:
@@ -136,6 +135,10 @@ MonoBehaviour:
     y: 0
     z: 0
   doubleShot: 0
+  quadrantPosition:
+    x: 0
+    y: 0
+    z: 0
 --- !u!114 &7171553241800144488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,4 +165,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  isActive: 0
+--- !u!114 &-8146754562038712570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558109986609959527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bef028aec510114da5378f6931f6bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quadrant:
+    x: 0
+    y: 0
+    z: 0

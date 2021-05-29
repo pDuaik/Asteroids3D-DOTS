@@ -23,6 +23,14 @@ public class ECSManager : MonoBehaviour
         var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(missilePrefab, settings);
         var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, settings);
 
+        // Calculate quadrant space size
+        int currentQuadrantSpaceSize = 1;
+        do
+        {
+            currentQuadrantSpaceSize *= 2;
+        } while (currentQuadrantSpaceSize < GameDataManager.singleton.asteroidSize * 2);
+        
+
         // Instantiate
         InstantiatePlayer(manager, missileEntity, playerEntity);
         PopulateAsteroids(manager, asteroidEntity);
