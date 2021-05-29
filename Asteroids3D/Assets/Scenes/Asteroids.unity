@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasSize: 8192
-  numberOfAsteroids: 1
+  numberOfAsteroids: 1600
   asteroidRandomRotationSpeedMinMax:
     x: 0.1
     y: 1
@@ -161,11 +161,9 @@ MonoBehaviour:
     x: 5
     y: 10
   asteroidSize: 300
-  numberOfMissiles: 1
   missileSpeed: 100
   missileSize: 2
   missileLifeSpan: 10
-  cooldown: 1
   shield: 0
   doubleShot: 0
   shieldTimer: 5
