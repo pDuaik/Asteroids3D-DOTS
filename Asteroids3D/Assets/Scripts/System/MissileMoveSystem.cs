@@ -16,9 +16,7 @@ public class MissileMoveSystem : JobComponentSystem
             .ForEach((
                 ref Translation position,
                 ref Rotation rotation,
-                ref MissileData missileData,
-                ref CollisionData collisionData,
-                ref HyperspaceJumpData hyperspaceJumpData) =>
+                ref MissileData missileData) =>
             {
                 float3 missileForward = math.mul(rotation.Value, new float3(0, 0, 1) * missileSpeed * deltaTime);
                 position.Value += missileData.initialVector + missileForward;

@@ -1,5 +1,7 @@
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Collections;
+using Unity.Transforms;
 
 [GenerateAuthoringComponent]
 public struct MissileData : IComponentData
@@ -17,4 +19,7 @@ public struct MissileData : IComponentData
     // Quadrant Matrix
     //[System.NonSerialized]
     public float3 quadrantPosition;
+
+    // Missile Hit
+    public Entity hit;
 }

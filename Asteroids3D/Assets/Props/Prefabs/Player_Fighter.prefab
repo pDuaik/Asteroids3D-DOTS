@@ -9700,7 +9700,6 @@ GameObject:
   - component: {fileID: 642885116553545115}
   - component: {fileID: 5680596650987802804}
   - component: {fileID: 5396035009936513690}
-  - component: {fileID: -673334431676785587}
   m_Layer: 0
   m_Name: Player_Fighter
   m_TagString: Untagged
@@ -9760,19 +9759,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
---- !u!114 &-673334431676785587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7137113747991702883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bef028aec510114da5378f6931f6bb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quadrant:
-    x: 0
-    y: 0
-    z: 0

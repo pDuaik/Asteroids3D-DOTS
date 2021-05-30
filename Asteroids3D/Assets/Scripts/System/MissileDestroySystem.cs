@@ -10,8 +10,15 @@ public class MissileDestroySystem : JobComponentSystem
             .WithStructuralChanges()
             .ForEach((Entity entity, ref MissileData missileData) =>
             {
-                if (missileData.currentLifeSpan >= missileData.lifeSpan)
+                if (missileData.hit != Entity.Null)
+                {
+                    EntityManager.DestroyEntity(missileData.hit);
                     EntityManager.DestroyEntity(entity);
+                }
+                else if (missileData.currentLifeSpan >= missileData.lifeSpan)
+                {
+                    EntityManager.DestroyEntity(entity);
+                }
             })
             .Run();
 
