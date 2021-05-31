@@ -105,7 +105,6 @@ MonoBehaviour:
     y: 0
     z: 0
   asteroidSpeed: 0
-  isActive: 0
 --- !u!114 &7007047522605505143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,3 +118,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  canvasHalfSize: 0

@@ -126,9 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd69c8af78c0e3543996b690a4d52131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeSpan: 5
+  lifeSpan: 0
   currentLifeSpan: 0
-  missileSpeed: 50
+  missileSpeed: 0
   initialVector:
     x: 0
     y: 0
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  canvasHalfSize: 0

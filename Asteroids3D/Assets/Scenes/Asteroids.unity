@@ -369,10 +369,16 @@ MonoBehaviour:
   characterTracker: {fileID: 643117593}
   asteroidPrefab: {fileID: 6995301307847179669, guid: 21553e62233888c46960aba242d968c9, type: 3}
   playerPrefab: {fileID: 7137113747991702883, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
+  missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
   canvasHalfSize: 8192
   numberOfAsteroids: 1600
   asteroidRadius: 256
-  asteroidRotationSpeedMin: 0.1
-  asteroidRotationSpeedMax: 1
+  asteroidRotationSpeedMin: 1
+  asteroidRotationSpeedMax: 0.1
   asteroidSpeedMin: 5
   asteroidSpeedMax: 10
+  rotationSpeed: 2
+  acceleration: 5
+  shootingCooldownTime: 1
+  missileLifeSpan: 5
+  missileSpeed: 200

@@ -23,6 +23,7 @@ public class PlayerShootingScript : JobComponentSystem
             .WithStructuralChanges()
             .ForEach((ref PlayerData playerData,
                       ref EntityData entityData,
+                      ref HyperspaceJumpData hyperspaceJumpData,
                       ref Rotation rotation,
                       ref Translation position) =>
             {
@@ -33,11 +34,11 @@ public class PlayerShootingScript : JobComponentSystem
                     playerData.currentShootingCooldownTime = 0;
 
                     // Instantiate missile
-                    InstantiateMissile(playerData, rotation, position, entityData.entity, 0);
+                    InstantiateMissile(playerData, hyperspaceJumpData, rotation, position, entityData.entity, 0);
                     if (playerData.powerUp)
                     {
-                        InstantiateMissile(playerData, rotation, position, entityData.entity, -75);
-                        InstantiateMissile(playerData, rotation, position, entityData.entity, 75);
+                        InstantiateMissile(playerData, hyperspaceJumpData, rotation, position, entityData.entity, -75);
+                        InstantiateMissile(playerData, hyperspaceJumpData, rotation, position, entityData.entity, 75);
                     }
                 }
 
@@ -49,7 +50,12 @@ public class PlayerShootingScript : JobComponentSystem
         return inputDeps;
     }
 
-    private void InstantiateMissile(PlayerData playerData, Rotation rotation, Translation position, Entity missile, float angle)
+    private void InstantiateMissile(PlayerData playerData,
+                                    HyperspaceJumpData hyperspaceJumpData,
+                                    Rotation rotation,
+                                    Translation position,
+                                    Entity missile,
+                                    float angle)
     {
         Entity missileInstance = manager.Instantiate(missile);
         manager.SetComponentData(missileInstance, new Rotation
@@ -63,5 +69,7 @@ public class PlayerShootingScript : JobComponentSystem
             lifeSpan = playerData.missileLifeSpan,
             missileSpeed = playerData.missileSpeed
         });
+        // Set Hyperspace Jump
+        manager.SetComponentData(missileInstance, new HyperspaceJumpData { isPlayer = false, canvasHalfSize = hyperspaceJumpData.canvasHalfSize });
     }
 }

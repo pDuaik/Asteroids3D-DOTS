@@ -20,10 +20,7 @@ public struct PlayerData : IComponentData
     public bool powerUp;
 
     // Trackers:
-    [NonSerialized]
     public float currentShootingCooldownTime;
-    [NonSerialized]
     public float3 currentThrust;
-    [NonSerialized]
     public float3 currentVelocity;
 }

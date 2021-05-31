@@ -9737,12 +9737,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749504e6f3daeb344a1d581c5318d6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missileLifeSpan: 5
-  missileSpeed: 200
-  rotationSpeed: 2
-  acceleration: 5
-  shootingCooldownTime: 1
+  missileLifeSpan: 0
+  missileSpeed: 0
+  rotationSpeed: 0
+  acceleration: 0
+  shootingCooldownTime: 0
   powerUp: 0
+  currentShootingCooldownTime: 0
+  currentThrust:
+    x: 0
+    y: 0
+    z: 0
+  currentVelocity:
+    x: 0
+    y: 0
+    z: 0
 --- !u!114 &5396035009936513690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9755,7 +9764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df6917ee0c45b14c9a18020648412b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 1
+  isPlayer: 0
   canvasHalfSize: 0
 --- !u!114 &5581636931776128218
 MonoBehaviour:
@@ -9769,4 +9778,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d16f86d2cccb184bbb1fa03a272e140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
+  entity: {fileID: 0}
