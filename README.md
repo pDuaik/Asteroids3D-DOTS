@@ -39,6 +39,7 @@ A full circle of spheres highlight the correct place.
 - [x] New Collision System
 - [x] New Shooting System
 - [x] New Camera Movement System
+- [x] Killed Game Data Manager
 - [ ] Change Missile Collision query to buffer
 - [ ] Change Power-Up System
 - [ ] Change Shield System
