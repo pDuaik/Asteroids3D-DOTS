@@ -1,5 +1,6 @@
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 public class PlayerShootingScript : JobComponentSystem
@@ -32,14 +33,12 @@ public class PlayerShootingScript : JobComponentSystem
                     playerData.currentShootingCooldownTime = 0;
 
                     // Instantiate missile
-                    Entity missileInstance = manager.Instantiate(playerData.missile);
-                    manager.SetComponentData(missileInstance, new Rotation { Value = rotation.Value });
-                    manager.SetComponentData(missileInstance, new Translation { Value = position.Value });
-                    manager.SetComponentData(missileInstance, new MissileData
+                    InstantiateMissile(playerData, rotation, position, missileLifeSpan, 0);
+                    if (playerData.powerUp)
                     {
-                        initialVector = playerData.currentVelocity,
-                        lifeSpan = missileLifeSpan,
-                    });
+                        InstantiateMissile(playerData, rotation, position, missileLifeSpan, -75);
+                        InstantiateMissile(playerData, rotation, position, missileLifeSpan, 75);
+                    }
                 }
 
                 // Add delta time to shooting cooldown timer
@@ -48,5 +47,20 @@ public class PlayerShootingScript : JobComponentSystem
             }).Run();
 
         return inputDeps;
+    }
+
+    private void InstantiateMissile(PlayerData playerData, Rotation rotation, Translation position, float missileLifeSpan, float angle)
+    {
+        Entity missileInstance = manager.Instantiate(playerData.missile);
+        manager.SetComponentData(missileInstance, new Rotation
+        {
+            Value = math.mul(rotation.Value, quaternion.AxisAngle(new float3(0, 1, 0), angle))
+        });
+        manager.SetComponentData(missileInstance, new Translation { Value = position.Value });
+        manager.SetComponentData(missileInstance, new MissileData
+        {
+            initialVector = playerData.currentVelocity,
+            lifeSpan = missileLifeSpan,
+        });
     }
 }
