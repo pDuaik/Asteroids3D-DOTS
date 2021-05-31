@@ -9743,6 +9743,7 @@ MonoBehaviour:
   acceleration: 0
   shootingCooldownTime: 0
   powerUp: 0
+  shield: 0
   currentShootingCooldownTime: 0
   currentThrust:
     x: 0

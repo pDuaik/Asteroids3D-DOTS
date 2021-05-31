@@ -1,6 +1,5 @@
 using Unity.Entities;
 using Unity.Mathematics;
-using System;
 
 [GenerateAuthoringComponent]
 public struct PlayerData : IComponentData
@@ -18,6 +17,7 @@ public struct PlayerData : IComponentData
 
     // Power-Up
     public bool powerUp;
+    public bool shield;
 
     // Trackers:
     public float currentShootingCooldownTime;

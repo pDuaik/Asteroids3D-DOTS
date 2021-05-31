@@ -370,6 +370,7 @@ MonoBehaviour:
   asteroidPrefab: {fileID: 6995301307847179669, guid: 21553e62233888c46960aba242d968c9, type: 3}
   playerPrefab: {fileID: 7137113747991702883, guid: c7210325b988f6d47bceed35e53b5b55, type: 3}
   missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
+  shieldPrefab: {fileID: 251281813179023132, guid: b0cff287974f6f7499dcec1952331a0f, type: 3}
   canvasHalfSize: 8192
   numberOfAsteroids: 1600
   asteroidRadius: 256
