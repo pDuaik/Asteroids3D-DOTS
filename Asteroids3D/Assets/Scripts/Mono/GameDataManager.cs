@@ -1,6 +1,5 @@
-using UnityEngine;
 using Unity.Mathematics;
-using Unity.Entities;
+using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
 {
@@ -22,47 +21,12 @@ public class GameDataManager : MonoBehaviour
     public float missileLifeSpan = 5;
     public float currentCooldown { get; set; }
 
-    // Power-ups
-    public bool shield = false;
-    public bool doubleShot = false;
-
-    // Shield logic
-    public float shieldTimer = 5;
-    private float currentShieldTimer = 0;
-
-    // Shot Logic
-    public float shotTimer = 10;
-    public float currentShotTimer = 0;
-
+    // Make sure there is only one instance of the class.
     private void Awake()
     {
-        // Make sure there is only one instance of the class.
         if (singleton != null && singleton != this)
             Destroy(gameObject);
         else
             singleton = this;
-    }
-
-    private void Update()
-    {
-        // This update must move to the player data.
-        // This is not a good pattern, but a choice due to time constrains.
-        // Power-Ups rely on this update.
-        currentCooldown += Time.deltaTime;
-        currentShieldTimer += Time.deltaTime;
-        if (currentShieldTimer >= shieldTimer)
-        {
-            currentShieldTimer -= shieldTimer;
-            shield = !shield;
-        }
-
-        if (currentShotTimer > 0)
-        {
-            currentShotTimer -= Time.deltaTime;
-        }
-        else
-        {
-            doubleShot = false;
-        }
     }
 }

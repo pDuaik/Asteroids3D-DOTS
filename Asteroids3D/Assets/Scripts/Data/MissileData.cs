@@ -13,13 +13,6 @@ public struct MissileData : IComponentData
     // Inital velocity to pair with player
     public float3 initialVector;
 
-    // If it is a double shot
-    public bool doubleShot;
-
-    // Quadrant Matrix
-    //[System.NonSerialized]
-    public float3 quadrantPosition;
-
     // Missile Hit
     public Entity hit;
 }

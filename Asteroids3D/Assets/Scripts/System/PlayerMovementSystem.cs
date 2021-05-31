@@ -20,9 +20,6 @@ public class PlayerMovementSystem : JobComponentSystem
         bool thrust = UnityEngine.Input.GetKey("left shift");
         bool stop = UnityEngine.Input.GetKey("left ctrl");
 
-        // GameDataManager variables
-        bool shield = GameDataManager.singleton.shield;
-
         JobHandle jobHandle = Entities
             .WithName("PlayerMovementSystem")
             .ForEach((ref Translation position, ref Rotation rotation, ref PlayerData playerData) =>
@@ -38,7 +35,7 @@ public class PlayerMovementSystem : JobComponentSystem
                 }
                 else if (stop)
                 {
-                    playerData.currentThrust = math.lerp(playerData.currentThrust, float3.zero, deltaTime * playerData.acceleration);
+                    playerData.currentThrust = math.lerp(playerData.currentThrust, float3.zero, deltaTime * playerData.acceleration / 4);
                 }
 
                 // Update position and calculate current velocity

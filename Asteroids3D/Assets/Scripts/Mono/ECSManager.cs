@@ -38,8 +38,6 @@ public class ECSManager : MonoBehaviour
             acceleration = manager.GetComponentData<PlayerData>(playerInstance).acceleration,
             shootingCooldownTime = manager.GetComponentData<PlayerData>(playerInstance).shootingCooldownTime,
             rotationSpeed = manager.GetComponentData<PlayerData>(playerInstance).rotationSpeed,
-            powerUpPosition = manager.GetComponentData<PlayerData>(playerInstance).powerUpPosition,
-            powerUpRadius = manager.GetComponentData<PlayerData>(playerInstance).powerUpRadius
         });
         characterTracker.GetComponent<CameraMovement>().SetReceivedEntity(playerInstance);
 #if UNITY_EDITOR
