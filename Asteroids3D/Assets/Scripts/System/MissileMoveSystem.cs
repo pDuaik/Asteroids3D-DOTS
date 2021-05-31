@@ -19,6 +19,7 @@ public class MissileMoveSystem : JobComponentSystem
             {
                 float3 missileForward = math.mul(rotation.Value, new float3(0, 0, 1) * missileData.missileSpeed * deltaTime);
                 position.Value += missileData.initialVector + missileForward;
+                rotation.Value = math.mul(rotation.Value, quaternion.RotateZ(5 *deltaTime));
                 missileData.currentLifeSpan += deltaTime;
             })
             .Schedule(inputDeps);
