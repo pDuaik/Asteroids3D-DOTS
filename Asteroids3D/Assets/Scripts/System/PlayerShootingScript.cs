@@ -22,6 +22,7 @@ public class PlayerShootingScript : JobComponentSystem
             .WithoutBurst()
             .WithStructuralChanges()
             .ForEach((ref PlayerData playerData,
+                      ref EntityData entityData,
                       ref Rotation rotation,
                       ref Translation position) =>
             {
@@ -32,11 +33,11 @@ public class PlayerShootingScript : JobComponentSystem
                     playerData.currentShootingCooldownTime = 0;
 
                     // Instantiate missile
-                    InstantiateMissile(playerData, rotation, position, 0);
+                    InstantiateMissile(playerData, rotation, position, entityData.entity, 0);
                     if (playerData.powerUp)
                     {
-                        InstantiateMissile(playerData, rotation, position, -75);
-                        InstantiateMissile(playerData, rotation, position, 75);
+                        InstantiateMissile(playerData, rotation, position, entityData.entity, -75);
+                        InstantiateMissile(playerData, rotation, position, entityData.entity, 75);
                     }
                 }
 
@@ -48,9 +49,9 @@ public class PlayerShootingScript : JobComponentSystem
         return inputDeps;
     }
 
-    private void InstantiateMissile(PlayerData playerData, Rotation rotation, Translation position, float angle)
+    private void InstantiateMissile(PlayerData playerData, Rotation rotation, Translation position, Entity missile, float angle)
     {
-        Entity missileInstance = manager.Instantiate(playerData.missile);
+        Entity missileInstance = manager.Instantiate(missile);
         manager.SetComponentData(missileInstance, new Rotation
         {
             Value = math.mul(rotation.Value, quaternion.AxisAngle(new float3(0, 1, 0), angle))

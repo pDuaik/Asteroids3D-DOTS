@@ -126,14 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd69c8af78c0e3543996b690a4d52131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeSpan: 0
+  lifeSpan: 5
   currentLifeSpan: 0
+  missileSpeed: 50
   initialVector:
-    x: 0
-    y: 0
-    z: 0
-  doubleShot: 0
-  quadrantPosition:
     x: 0
     y: 0
     z: 0

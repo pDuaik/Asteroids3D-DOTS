@@ -8,8 +8,16 @@ public class ECSStart : MonoBehaviour
     // GameObjects to initialize the game
     public GameObject characterTracker;
     public GameObject asteroidPrefab;
-    public GameObject missilePrefab;
     public GameObject playerPrefab;
+
+    // Canvas variables
+    public int canvasHalfSize = 8192;
+    public int numberOfAsteroids = 1600;
+    public int asteroidRadius = 256;
+    public float asteroidRotationSpeedMin = 0.1f;
+    public float asteroidRotationSpeedMax = 1;
+    public float asteroidSpeedMin = 5;
+    public float asteroidSpeedMax = 10;
 
     private void Start()
     {
@@ -19,47 +27,57 @@ public class ECSStart : MonoBehaviour
 
         // Convert prefabs into entity.
         var asteroidEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(asteroidPrefab, settings);
-        var missileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(missilePrefab, settings);
         var playerEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, settings);
 
         // Instantiate
-        InstantiatePlayer(manager, missileEntity, playerEntity);
-        PopulateAsteroids(manager, asteroidEntity);
+        InstantiatePlayer(manager, playerEntity);
+        PopulateAsteroids(manager,
+                          asteroidEntity,
+                          canvasHalfSize,
+                          numberOfAsteroids, 
+                          asteroidRadius,
+                          asteroidRotationSpeedMin,
+                          asteroidRotationSpeedMax,
+                          asteroidSpeedMin,
+                          asteroidSpeedMax);
     }
 
-    private void InstantiatePlayer(EntityManager manager, Entity missileEntity, Entity playerEntity)
+    private void InstantiatePlayer(EntityManager manager, Entity playerEntity)
     {
         // Instantiate Player.
         Entity playerInstance = manager.Instantiate(playerEntity);
-        manager.SetComponentData(playerInstance, new PlayerData
-        {
-            missile = missileEntity,
-            acceleration = manager.GetComponentData<PlayerData>(playerInstance).acceleration,
-            shootingCooldownTime = manager.GetComponentData<PlayerData>(playerInstance).shootingCooldownTime,
-            rotationSpeed = manager.GetComponentData<PlayerData>(playerInstance).rotationSpeed,
-        });
+        // Set Camera tracker
         characterTracker.GetComponent<CameraMovement>().SetReceivedEntity(playerInstance);
+
+        // Give a name for debugging
 #if UNITY_EDITOR
         manager.SetName(playerInstance, "Player");
 #endif
     }
 
-    private static void PopulateAsteroids(EntityManager manager, Entity asteroidEntity)
+    private static void PopulateAsteroids(EntityManager manager,
+                                          Entity asteroidEntity,
+                                          int canvasHalfSize, 
+                                          int numberOfAsteroids,
+                                          int asteroidRadius,
+                                          float asteroidRotationSpeedMin,
+                                          float asteroidRotationSpeedMax,
+                                          float asteroidSpeedMin,
+                                          float asteroidSpeedMax)
     {
-        for (int i = 0; i < GameDataManager.singleton.numberOfAsteroids; i++)
+        for (int i = 0; i < numberOfAsteroids; i++)
         {
             // Instantiate Entity.
             Entity asteroidInstance = manager.Instantiate(asteroidEntity);
 
             // Position
-            float canvasSize = GameDataManager.singleton.canvasHalfSize;
             float3 randomPosition = float3.zero;
             // Prevent asteroid to awake overlaping player.
             while (math.distancesq(randomPosition, float3.zero) < math.pow(60, 2))
             {
-                randomPosition = new float3(UnityEngine.Random.Range(-canvasSize, canvasSize),
-                                               UnityEngine.Random.Range(-canvasSize, canvasSize),
-                                               UnityEngine.Random.Range(-canvasSize, canvasSize)
+                randomPosition = new float3(UnityEngine.Random.Range(-canvasHalfSize, canvasHalfSize),
+                                               UnityEngine.Random.Range(-canvasHalfSize, canvasHalfSize),
+                                               UnityEngine.Random.Range(-canvasHalfSize, canvasHalfSize)
                                                );
             }
             manager.SetComponentData(asteroidInstance, new Translation { Value = randomPosition });
@@ -75,16 +93,16 @@ public class ECSStart : MonoBehaviour
             manager.SetComponentData(asteroidInstance, new AsteroidData
             {
                 asteroidAxisRotation = UnityEngine.Random.onUnitSphere,
-                asteroidSpeedRotation = UnityEngine.Random.Range(GameDataManager.singleton.asteroidRandomRotationSpeedMinMax.x,
-                                                                 GameDataManager.singleton.asteroidRandomRotationSpeedMinMax.y),
+                asteroidSpeedRotation = UnityEngine.Random.Range(asteroidRotationSpeedMin,
+                                                                 asteroidRotationSpeedMax),
                 asteroidDirection = UnityEngine.Random.onUnitSphere,
-                asteroidSpeed = UnityEngine.Random.Range(GameDataManager.singleton.asteroidRandomSpeedMinMax.x,
-                                                         GameDataManager.singleton.asteroidRandomSpeedMinMax.y),
-                isActive = i < GameDataManager.singleton.numberOfAsteroids ? true : false
+                asteroidSpeed = UnityEngine.Random.Range(asteroidSpeedMin,
+                                                         asteroidSpeedMax),
+                isActive = i < numberOfAsteroids ? true : false
             });
 
             // Scale
-            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * GameDataManager.singleton.asteroidRadius });
+            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * asteroidRadius });
         }
     }
 }

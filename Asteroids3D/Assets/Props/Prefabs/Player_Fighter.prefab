@@ -9700,6 +9700,7 @@ GameObject:
   - component: {fileID: 642885116553545115}
   - component: {fileID: 5680596650987802804}
   - component: {fileID: 5396035009936513690}
+  - component: {fileID: 5581636931776128218}
   m_Layer: 0
   m_Name: Player_Fighter
   m_TagString: Untagged
@@ -9736,8 +9737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749504e6f3daeb344a1d581c5318d6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missile: {fileID: 0}
-  rotationSpeed: 1
+  missileLifeSpan: 5
+  missileSpeed: 200
+  rotationSpeed: 2
   acceleration: 5
   shootingCooldownTime: 1
   powerUp: 0
@@ -9754,3 +9756,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  canvasHalfSize: 0
+--- !u!114 &5581636931776128218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137113747991702883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d16f86d2cccb184bbb1fa03a272e140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}

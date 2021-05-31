@@ -6,7 +6,6 @@ using System;
 public struct PlayerData : IComponentData
 {
     // Missile Variables
-    public Entity missile;
     public float missileLifeSpan;
     public float missileSpeed;
 

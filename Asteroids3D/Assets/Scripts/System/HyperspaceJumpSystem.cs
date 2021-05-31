@@ -14,8 +14,6 @@ public class HyperspaceJumpSystem : JobComponentSystem
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         float3 cameraPosition = EntityManager.GetComponentData<Translation>(player).Value;
-        float canvasSize = GameDataManager.singleton.canvasHalfSize;
-        float playerArea = canvasSize / 4;
 
         JobHandle jobHandle = Entities
             .WithName("HyperspaceJumpSystem")
@@ -23,6 +21,9 @@ public class HyperspaceJumpSystem : JobComponentSystem
                       ref Rotation rotation,
                       ref HyperspaceJumpData hyperspaceJumpData) =>
             {
+                var canvasSize = hyperspaceJumpData.canvasHalfSize;
+                var playerArea = canvasSize / 4;
+
                 // Player's Hyperspace Jump.
                 if (hyperspaceJumpData.isPlayer)
                 {
