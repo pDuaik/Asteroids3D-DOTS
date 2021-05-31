@@ -15,11 +15,7 @@ public class GameDataManager : MonoBehaviour
     public float2 asteroidRandomRotationSpeedMinMax = float2.zero;
     public float2 asteroidRandomSpeedMinMax = float2.zero;
 
-    // Missile Variables
-    public float missileSpeed = 30;
-    public float missileSize = 2;
-    public float missileLifeSpan = 5;
-    public float currentCooldown { get; set; }
+
 
     // Make sure there is only one instance of the class.
     private void Awake()

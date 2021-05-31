@@ -5,8 +5,10 @@ using System;
 [GenerateAuthoringComponent]
 public struct PlayerData : IComponentData
 {
-    // Missile entity
+    // Missile Variables
     public Entity missile;
+    public float missileLifeSpan;
+    public float missileSpeed;
 
     // Gameplay variables
     public float rotationSpeed;

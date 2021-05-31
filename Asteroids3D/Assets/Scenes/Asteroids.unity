@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 1351499410}
   - component: {fileID: 1351499411}
   m_Layer: 0
-  m_Name: ECS Manager
+  m_Name: ECS Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

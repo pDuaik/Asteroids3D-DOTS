@@ -17,7 +17,6 @@ public class PlayerShootingScript : JobComponentSystem
     {
         bool shoot = UnityEngine.Input.GetKeyDown("space");
         float deltaTime = UnityEngine.Time.deltaTime;
-        float missileLifeSpan = GameDataManager.singleton.missileLifeSpan;
 
         Entities
             .WithoutBurst()
@@ -33,11 +32,11 @@ public class PlayerShootingScript : JobComponentSystem
                     playerData.currentShootingCooldownTime = 0;
 
                     // Instantiate missile
-                    InstantiateMissile(playerData, rotation, position, missileLifeSpan, 0);
+                    InstantiateMissile(playerData, rotation, position, 0);
                     if (playerData.powerUp)
                     {
-                        InstantiateMissile(playerData, rotation, position, missileLifeSpan, -75);
-                        InstantiateMissile(playerData, rotation, position, missileLifeSpan, 75);
+                        InstantiateMissile(playerData, rotation, position, -75);
+                        InstantiateMissile(playerData, rotation, position, 75);
                     }
                 }
 
@@ -49,7 +48,7 @@ public class PlayerShootingScript : JobComponentSystem
         return inputDeps;
     }
 
-    private void InstantiateMissile(PlayerData playerData, Rotation rotation, Translation position, float missileLifeSpan, float angle)
+    private void InstantiateMissile(PlayerData playerData, Rotation rotation, Translation position, float angle)
     {
         Entity missileInstance = manager.Instantiate(playerData.missile);
         manager.SetComponentData(missileInstance, new Rotation
@@ -60,7 +59,8 @@ public class PlayerShootingScript : JobComponentSystem
         manager.SetComponentData(missileInstance, new MissileData
         {
             initialVector = playerData.currentVelocity,
-            lifeSpan = missileLifeSpan,
+            lifeSpan = playerData.missileLifeSpan,
+            missileSpeed = playerData.missileSpeed
         });
     }
 }

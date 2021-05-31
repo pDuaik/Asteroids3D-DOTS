@@ -10,6 +10,9 @@ public struct MissileData : IComponentData
     public float lifeSpan;
     public float currentLifeSpan;
 
+    // Speed defined by player
+    public float missileSpeed;
+
     // Inital velocity to pair with player
     public float3 initialVector;
 

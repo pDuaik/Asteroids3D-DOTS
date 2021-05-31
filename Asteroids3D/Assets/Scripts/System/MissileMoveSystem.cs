@@ -9,7 +9,6 @@ public class MissileMoveSystem : JobComponentSystem
     {
         // Retrieve from Engine DeltaTime and Inputs.
         float deltaTime = UnityEngine.Time.deltaTime;
-        float missileSpeed = GameDataManager.singleton.missileSpeed;
 
         JobHandle jobHandle = Entities
             .WithName("MissileMoveSystem")
@@ -18,7 +17,7 @@ public class MissileMoveSystem : JobComponentSystem
                 ref Rotation rotation,
                 ref MissileData missileData) =>
             {
-                float3 missileForward = math.mul(rotation.Value, new float3(0, 0, 1) * missileSpeed * deltaTime);
+                float3 missileForward = math.mul(rotation.Value, new float3(0, 0, 1) * missileData.missileSpeed * deltaTime);
                 position.Value += missileData.initialVector + missileForward;
                 missileData.currentLifeSpan += deltaTime;
             })

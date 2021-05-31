@@ -3,14 +3,13 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-public class ECSManager : MonoBehaviour
+public class ECSStart : MonoBehaviour
 {
     // GameObjects to initialize the game
     public GameObject characterTracker;
     public GameObject asteroidPrefab;
     public GameObject missilePrefab;
     public GameObject playerPrefab;
-
 
     private void Start()
     {
