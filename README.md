@@ -1,7 +1,7 @@
 # tsb_unity_test_persis_duaik
 TSB Test
 
-## Game Controls:
+## Game Controls
 AWSD -> Move  
 SPACE -> Fire  
 LEFT SHIFT -> Acceleration  
@@ -34,3 +34,12 @@ Shooting it a second time will destroy the asteroid.
 The shield power-up will turn on automatically
 while the double shooting power-up must be collected.  
 A full circle of spheres highlight the correct place.
+
+## TODO List
+- [x] New Collision System
+- [x] New Shooting System
+- [x] New Camera Movement System
+- [ ] Change Missile Collision query to buffer
+- [ ] Change Power-Up System
+- [ ] Change Shield System
+- [ ] Improve player movement
