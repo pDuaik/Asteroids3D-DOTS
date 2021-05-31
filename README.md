@@ -43,3 +43,4 @@ A full circle of spheres highlight the correct place.
 - [ ] Change Power-Up System
 - [ ] Change Shield System
 - [ ] Improve player movement
+- [ ] Shatter Asteroid when hit by a missile.
