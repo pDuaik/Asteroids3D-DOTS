@@ -97,7 +97,7 @@ public class PlayerShootingSystem : JobComponentSystem
         for (int i = 0; i < asteroidEntities.Length; i++)
         {
             entityBufferDatas.Add(new EntityBufferData { Value = asteroidEntities[i] });
-            float3BufferDatas.Add(new Float3BufferData { Value = manager.GetComponentData<Translation>(asteroidEntities[i]).Value });
+            float3BufferDatas.Add(new Float3BufferData { Value = asteroidPositions[i].Value });
         }
     }
 }

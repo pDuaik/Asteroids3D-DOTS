@@ -25,19 +25,18 @@ public class PowerUpStart : MonoBehaviour
         var shieldEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(shieldPrefab, settings);
 
         // Instantiate
-        PopulatePowerUps(manager, powerEntity);
-        PopulatePowerUps(manager, shieldEntity);
-
+        PopulatePowerUps(manager, powerEntity, true, false);
+        PopulatePowerUps(manager, shieldEntity, true, false);
 
         Destroy(gameObject);
     }
 
-    private void PopulatePowerUps(EntityManager manager, Entity powerUpEntity)
+    private void PopulatePowerUps(EntityManager manager, Entity powerUpEntity, bool power, bool shield)
     {
         for (int i = 0; i < number; i++)
         {
             // Instantiate Entity.
-            Entity asteroidInstance = manager.Instantiate(powerUpEntity);
+            Entity PowerUpInstance = manager.Instantiate(powerUpEntity);
 
             // Position
             float3 randomPosition = float3.zero;
@@ -50,20 +49,22 @@ public class PowerUpStart : MonoBehaviour
                                             UnityEngine.Random.Range(-canvasHalfSize, canvasHalfSize)
                                             );
             } while (math.distancesq(randomPosition, float3.zero) < 10000);
-            manager.SetComponentData(asteroidInstance, new Translation { Value = randomPosition });
+            manager.SetComponentData(PowerUpInstance, new Translation { Value = randomPosition });
 
             // Rotation
-            manager.SetComponentData(asteroidInstance, new Rotation { Value = quaternion.identity });
+            manager.SetComponentData(PowerUpInstance, new Rotation { Value = quaternion.identity });
 
             // Scale
-            manager.AddComponentData(asteroidInstance, new NonUniformScale { Value = new float3(1, 1, 1) * size });
+            manager.AddComponentData(PowerUpInstance, new NonUniformScale { Value = new float3(1, 1, 1) * size });
 
             // Hyperspace Jump Data
-            manager.SetComponentData(asteroidInstance, new HyperspaceJumpData
+            manager.SetComponentData(PowerUpInstance, new HyperspaceJumpData
             {
                 isPlayer = false,
                 canvasHalfSize = canvasHalfSize
             });
+
+            manager.SetComponentData(PowerUpInstance, new CollectibleData { power = power, shield = shield });
         }
     }
 }

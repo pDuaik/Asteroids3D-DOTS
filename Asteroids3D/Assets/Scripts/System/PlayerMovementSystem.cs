@@ -6,11 +6,6 @@ using UnityEngine.Jobs;
 
 public class PlayerMovementSystem : JobComponentSystem
 {
-    Entity player;
-    protected override void OnStartRunning()
-    {
-        player = GetSingletonEntity<PlayerData>();
-    }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         // Retrieve from Engine DeltaTime and Inputs.
