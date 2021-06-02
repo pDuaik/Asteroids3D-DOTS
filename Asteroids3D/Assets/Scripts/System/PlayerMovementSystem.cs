@@ -45,6 +45,9 @@ public class PlayerMovementSystem : JobComponentSystem
             })
             .Schedule(inputDeps);
 
+        // trying to prevent some flickering.
+        jobHandle.Complete();
+
         return jobHandle;
     }
 }

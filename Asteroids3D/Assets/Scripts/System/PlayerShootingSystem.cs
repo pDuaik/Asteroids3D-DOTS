@@ -4,6 +4,7 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 
+[UpdateAfter(typeof(PlayerMovementSystem))]
 public class PlayerShootingSystem : JobComponentSystem
 {
     EntityManager manager;
