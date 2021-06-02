@@ -10,17 +10,16 @@ public class MissileCollisionSystem : JobComponentSystem
         var jobHandle = Entities
             .WithBurst()
             .WithName("MissileCollisionSystem")
-            .ForEach((Entity entity,
-                      ref MissileData missileData,
+            .ForEach((ref MissileData missileData,
                       ref Translation position,
                       ref DynamicBuffer<EntityBufferData> entityBufferDatas,
-                      ref DynamicBuffer<Float3BufferData> float3BufferDatas) =>
+                      ref DynamicBuffer<TranslationBufferData> translationBufferDatas) =>
             {
                 for (int i = 0; i < entityBufferDatas.Length; i++)
                 {
-                    if (math.distancesq(float3BufferDatas[i].Value, position.Value) < 300 * 300)
+                    if (math.distancesq(translationBufferDatas[i].position.Value, position.Value) < 300 * 300)
                     {
-                        missileData.hit = entityBufferDatas[i].Value;
+                        missileData.hit = entityBufferDatas[i].entity;
                         break;
                     }
                 }
@@ -30,6 +29,6 @@ public class MissileCollisionSystem : JobComponentSystem
         // Guarantees the job has completed before schedulling another one.
         jobHandle.Complete();
 
-        return inputDeps;
+        return jobHandle;
     }
 }

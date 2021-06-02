@@ -15,10 +15,6 @@ public struct PlayerData : IComponentData
     // Missile shooting cooldown
     public float shootingCooldownTime;
 
-    // Power-Up
-    public bool powerUp;
-    public bool shield;
-
     // Trackers:
     public float currentShootingCooldownTime;
     public float3 currentThrust;
@@ -26,4 +22,8 @@ public struct PlayerData : IComponentData
 
     // When a collision happens
     public Entity hit;
+
+    // Power-Up
+    public bool power;
+    public bool shield;
 }

@@ -25,7 +25,7 @@ public class PowerUpStart : MonoBehaviour
         var shieldEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(shieldPrefab, settings);
 
         // Instantiate
-        PopulatePowerUps(manager, powerEntity, true, false);
+        //PopulatePowerUps(manager, powerEntity, true, false);
         PopulatePowerUps(manager, shieldEntity, true, false);
 
         Destroy(gameObject);

@@ -3,6 +3,13 @@ using Unity.Jobs;
 
 public class MissileDestroySystem : JobComponentSystem
 {
+    EntityManager manager;
+
+    protected override void OnStartRunning()
+    {
+        manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+    }
+
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         Entities
@@ -12,12 +19,12 @@ public class MissileDestroySystem : JobComponentSystem
             {
                 if (missileData.hit != Entity.Null)
                 {
-                    EntityManager.DestroyEntity(missileData.hit);
-                    EntityManager.DestroyEntity(entity);
+                    manager.DestroyEntity(missileData.hit);
+                    manager.DestroyEntity(entity);
                 }
                 else if (missileData.currentLifeSpan >= missileData.lifeSpan)
                 {
-                    EntityManager.DestroyEntity(entity);
+                    manager.DestroyEntity(entity);
                 }
             })
             .Run();

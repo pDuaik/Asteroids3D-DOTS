@@ -13,7 +13,7 @@ public class PlayerMovementSystem : JobComponentSystem
         float horizontal = UnityEngine.Input.GetAxis("Horizontal");
         float vertical = UnityEngine.Input.GetAxis("Vertical");
         bool thrust = UnityEngine.Input.GetKey("left shift");
-        bool stop = UnityEngine.Input.GetKey("left ctrl");
+        bool stop = UnityEngine.Input.GetKeyDown("q");
 
         JobHandle jobHandle = Entities
             .WithName("PlayerMovementSystem")
@@ -30,7 +30,7 @@ public class PlayerMovementSystem : JobComponentSystem
                 }
                 else if (stop)
                 {
-                    playerData.currentThrust = math.lerp(playerData.currentThrust, float3.zero, deltaTime * playerData.acceleration / 4);
+                    playerData.currentThrust = float3.zero;
                 }
 
                 // Update position and calculate current velocity

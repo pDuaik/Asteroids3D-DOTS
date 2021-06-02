@@ -3,5 +3,5 @@ using Unity.Entities;
 [GenerateAuthoringComponent]
 public struct EntityBufferData : IBufferElementData
 {
-    public Entity Value;
+    public Entity entity;
 }

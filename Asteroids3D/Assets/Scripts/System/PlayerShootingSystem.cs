@@ -33,28 +33,25 @@ public class PlayerShootingSystem : JobComponentSystem
                 if (playerData.currentShootingCooldownTime >= playerData.shootingCooldownTime && shoot)
                 {
                     // Query for Asteroids
-                    EntityQuery query = GetEntityQuery(typeof(AsteroidData), typeof(Translation));
+                    EntityQuery query = GetEntityQuery(typeof(AsteroidData));
                     NativeArray<Entity> asteroidEntities = query.ToEntityArray(Allocator.TempJob);
-                    NativeArray<Translation> asteroidPositions = query.ToComponentDataArray<Translation>(Allocator.TempJob);
 
                     // Reset timer
                     playerData.currentShootingCooldownTime = 0;
 
                     // Instantiate missile
-                    InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, asteroidPositions, rotation, position, entityData.entity, 0);
-                    if (playerData.powerUp)
+                    InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, rotation, position, entityData.entity, 0);
+                    if (playerData.power)
                     {
-                        InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, asteroidPositions, rotation, position, entityData.entity, -75);
-                        InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, asteroidPositions, rotation, position, entityData.entity, 75);
+                        InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, rotation, position, entityData.entity, -75);
+                        InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, rotation, position, entityData.entity, 75);
                     }
 
                     asteroidEntities.Dispose();
-                    asteroidPositions.Dispose();
                 }
 
                 // Add delta time to shooting cooldown timer
                 playerData.currentShootingCooldownTime += deltaTime;
-
             }).Run();
 
         return inputDeps;
@@ -63,7 +60,6 @@ public class PlayerShootingSystem : JobComponentSystem
     private void InstantiateMissile(PlayerData playerData,
                                     HyperspaceJumpData hyperspaceJumpData,
                                     NativeArray<Entity> asteroidEntities,
-                                    NativeArray<Translation> asteroidPositions,
                                     Rotation rotation,
                                     Translation position,
                                     Entity missile,
@@ -93,11 +89,11 @@ public class PlayerShootingSystem : JobComponentSystem
 
         // Populate Dynamic Buffer
         DynamicBuffer<EntityBufferData> entityBufferDatas = manager.GetBuffer<EntityBufferData>(missileInstance);
-        DynamicBuffer<Float3BufferData> float3BufferDatas = manager.GetBuffer<Float3BufferData>(missileInstance);
+        DynamicBuffer<TranslationBufferData> float3BufferDatas = manager.GetBuffer<TranslationBufferData>(missileInstance);
         for (int i = 0; i < asteroidEntities.Length; i++)
         {
-            entityBufferDatas.Add(new EntityBufferData { Value = asteroidEntities[i] });
-            float3BufferDatas.Add(new Float3BufferData { Value = asteroidPositions[i].Value });
+            entityBufferDatas.Add(new EntityBufferData { entity = asteroidEntities[i] });
+            float3BufferDatas.Add(new TranslationBufferData { position = manager.GetComponentData<Translation>(asteroidEntities[i]) });
         }
     }
 }

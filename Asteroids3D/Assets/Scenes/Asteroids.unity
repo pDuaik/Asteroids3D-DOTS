@@ -368,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerPrefab: {fileID: 7622145679650409300, guid: a98501ee48655fe4b9c254a008a00839, type: 3}
   shieldPrefab: {fileID: 7622145679650409300, guid: 62a50043f62504b4d91c0f020ae1f1a7, type: 3}
-  number: 16
+  number: 4096
   size: 250
 --- !u!1 &1262668532
 GameObject:
