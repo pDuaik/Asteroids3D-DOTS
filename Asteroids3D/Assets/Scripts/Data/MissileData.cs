@@ -1,13 +1,21 @@
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Collections;
+using Unity.Transforms;
 
 [GenerateAuthoringComponent]
 public struct MissileData : IComponentData
 {
-    public bool isActive;
-    public bool awake;
+    // Time it takes to destroy the missile
     public float lifeSpan;
     public float currentLifeSpan;
+
+    // Speed defined by player
+    public float missileSpeed;
+
+    // Inital velocity to pair with player
     public float3 initialVector;
-    public bool doubleShot;
+
+    // Missile Hit
+    public Entity hit;
 }

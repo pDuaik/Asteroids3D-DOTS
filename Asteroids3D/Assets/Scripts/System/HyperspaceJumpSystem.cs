@@ -6,11 +6,14 @@ using UnityEngine.Jobs;
 
 public class HyperspaceJumpSystem : JobComponentSystem
 {
+    Entity player;
+    protected override void OnStartRunning()
+    {
+        player = GetSingletonEntity<PlayerData>();
+    }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
-        float3 cameraPosition = GameDataManager.singleton.mainCamera.position;
-        float canvasSize = GameDataManager.singleton.canvasSize;
-        float playerArea = canvasSize / 4;
+        float3 cameraPosition = EntityManager.GetComponentData<Translation>(player).Value;
 
         JobHandle jobHandle = Entities
             .WithName("HyperspaceJumpSystem")
@@ -18,6 +21,9 @@ public class HyperspaceJumpSystem : JobComponentSystem
                       ref Rotation rotation,
                       ref HyperspaceJumpData hyperspaceJumpData) =>
             {
+                var canvasSize = hyperspaceJumpData.canvasHalfSize;
+                var playerArea = canvasSize / 4;
+
                 // Player's Hyperspace Jump.
                 if (hyperspaceJumpData.isPlayer)
                 {
@@ -30,7 +36,7 @@ public class HyperspaceJumpSystem : JobComponentSystem
                         position.Value.z -= canvasSize / 2 * math.sign(position.Value.z);
                 }
                 // Asteroids Hyperspace Jump
-                else if (hyperspaceJumpData.isActive)
+                else
                 {
                     // Move asteroids with player.
                     if (cameraPosition.x > playerArea)
