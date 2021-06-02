@@ -23,4 +23,7 @@ public struct PlayerData : IComponentData
     public float currentShootingCooldownTime;
     public float3 currentThrust;
     public float3 currentVelocity;
+
+    // When a collision happens
+    public Entity hit;
 }
