@@ -1,15 +1,15 @@
-# tsb_unity_test_persis_duaik
-TSB Test
+# Asteroids3D
+Using DOTS to create an Asteroids game in 3D.  
+The purpose of the project is to dive deep into DOTS,  
+and find best practices for a Data-Oriented project.
+I am also doing my best to avoid libraries, relying, in most cases,  
+on mathematical responses to complex problems.
 
 ## Game Controls
-AWSD -> Move  
-SPACE -> Fire  
-LEFT SHIFT -> Acceleration  
-White Balls Area -> Shooting Power UP
-
-## Github
-Main Branch -> Game running and working.  
-Secondary Branch -> Code Review and Clean-Up. Game not necessarily working.
+- AWSD -> Move  
+- SPACE -> Fire  
+- LEFT SHIFT -> Acceleration
+- LEFT CTRL -> Brakes **(horrible workaround that I will delete soon)**
 
 ## Asteroids 3D
 The main objective is to bring the classic Asteroids game to a 3D perspective.  
@@ -40,7 +40,7 @@ A full circle of spheres highlight the correct place.
 - [x] New Shooting System
 - [x] New Camera Movement System
 - [x] Killed Game Data Manager
-- [ ] Change Missile Collision query to buffer
+- [x] Change Missile Collision query to buffer
 - [ ] Change Power-Up System
 - [ ] Change Shield System
 - [ ] Improve player movement
