@@ -1,32 +1,47 @@
 # tsb_unity_test_persis_duaik
 TSB Test
 
-Game Controls:
-AWSD -> Move
-SPACE -> Fire
-LEFT SHIFT -> Acceleration
+## Game Controls
+AWSD -> Move  
+SPACE -> Fire  
+LEFT SHIFT -> Acceleration  
 White Balls Area -> Shooting Power UP
 
-Asteroids 3D
-The main objective is to bring the classic Asteroids game to a 3D perspective.
+## Github
+Main Branch -> Game running and working.  
+Secondary Branch -> Code Review and Clean-Up. Game not necessarily working.
+
+## Asteroids 3D
+The main objective is to bring the classic Asteroids game to a 3D perspective.  
 Using DOTS, I tried to maintain the original movement of the starship;
 something that made the game quite hard.
 
-Hyperspace Jump
-There is a full system that keeps all rocks in a canvas area.
+## Hyperspace Jump
+There is a full system that keeps all rocks in a canvas area.  
 It gives the idea o infinity space, even though the amount of Asteroids is finite.
 
-Collision System
-I haven't used the Physics library, thus making my collision system.
+## Collision System
+I haven't used the Physics library, thus making my collision system.  
 It relies upon the distance from objects,
-simplifying all objects colliders to spheres.
+simplifying all objects colliders to spheres.  
 My goal was to use mathematics as much as possible.
 
-Asteroid
-When you hit an Asteroid, it will decrease in size.
+## Asteroid
+When you hit an Asteroid, it will decrease in size.  
 Shooting it a second time will destroy the asteroid.
 
-Power-Up
+## Power-Up
 The shield power-up will turn on automatically
-while the double shooting power-up must be collected.
+while the double shooting power-up must be collected.  
 A full circle of spheres highlight the correct place.
+
+## TODO List
+- [x] New Collision System
+- [x] New Shooting System
+- [x] New Camera Movement System
+- [x] Killed Game Data Manager
+- [ ] Change Missile Collision query to buffer
+- [ ] Change Power-Up System
+- [ ] Change Shield System
+- [ ] Improve player movement
+- [ ] Shatter Asteroid when hit by a missile.
