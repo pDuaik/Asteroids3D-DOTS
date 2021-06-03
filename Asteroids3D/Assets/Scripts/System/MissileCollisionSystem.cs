@@ -8,19 +8,27 @@ public class MissileCollisionSystem : JobComponentSystem
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         var jobHandle = Entities
-            .WithBurst()
+            .WithoutBurst()
             .WithName("MissileCollisionSystem")
-            .ForEach((ref MissileData missileData,
+            .ForEach((Entity missile,
+                      ref MissileData missileData,
                       ref Translation position,
-                      ref DynamicBuffer<EntityBufferData> entityBufferDatas,
-                      ref DynamicBuffer<TranslationBufferData> translationBufferDatas) =>
+                      ref DynamicBuffer<CollisionEntityBufferData> collisionEntityBufferDatas,
+                      ref DynamicBuffer<CollisionPositionBufferData> collisionPositionBufferDatas) =>
             {
-                for (int i = 0; i < entityBufferDatas.Length; i++)
+                for (int i = 0; i < collisionEntityBufferDatas.Length; i++)
                 {
-                    if (math.distancesq(translationBufferDatas[i].position.Value, position.Value) < 300 * 300)
+                    try
                     {
-                        missileData.hit = entityBufferDatas[i].entity;
-                        break;
+                        if (math.distancesq(float3.zero, position.Value) < 300 * 300)
+                        {
+                            missileData.hit = collisionEntityBufferDatas[i].entity;
+                            break;
+                        }
+                    }
+                    catch
+                    {
+                        continue;
                     }
                 }
             })

@@ -18,7 +18,6 @@ public class HyperspaceJumpSystem : JobComponentSystem
         JobHandle jobHandle = Entities
             .WithName("HyperspaceJumpSystem")
             .ForEach((ref Translation position,
-                      ref Rotation rotation,
                       ref HyperspaceJumpData hyperspaceJumpData) =>
             {
                 var canvasSize = hyperspaceJumpData.canvasHalfSize;

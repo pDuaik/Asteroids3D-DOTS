@@ -1,7 +1,7 @@
 using Unity.Entities;
 
 [GenerateAuthoringComponent]
-public struct EntityBufferData : IBufferElementData
+public struct CollisionEntityBufferData : IBufferElementData
 {
     public Entity entity;
 }

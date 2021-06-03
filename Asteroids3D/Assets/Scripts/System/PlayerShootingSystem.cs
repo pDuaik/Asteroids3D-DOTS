@@ -88,12 +88,12 @@ public class PlayerShootingSystem : JobComponentSystem
         manager.SetComponentData(missileInstance, new HyperspaceJumpData { isPlayer = false, canvasHalfSize = hyperspaceJumpData.canvasHalfSize });
 
         // Populate Dynamic Buffer
-        DynamicBuffer<EntityBufferData> entityBufferDatas = manager.GetBuffer<EntityBufferData>(missileInstance);
-        DynamicBuffer<TranslationBufferData> float3BufferDatas = manager.GetBuffer<TranslationBufferData>(missileInstance);
+        DynamicBuffer<CollisionEntityBufferData> entityBufferDatas = manager.GetBuffer<CollisionEntityBufferData>(missileInstance);
+        DynamicBuffer<CollisionPositionBufferData> positionBufferDatas = manager.GetBuffer<CollisionPositionBufferData>(missileInstance);
         for (int i = 0; i < asteroidEntities.Length; i++)
         {
-            entityBufferDatas.Add(new EntityBufferData { entity = asteroidEntities[i] });
-            float3BufferDatas.Add(new TranslationBufferData { position = manager.GetComponentData<Translation>(asteroidEntities[i]) });
+            entityBufferDatas.Add(new CollisionEntityBufferData { entity = asteroidEntities[i] });
+            positionBufferDatas.Add(new CollisionPositionBufferData { position = manager.GetComponentData<Translation>(asteroidEntities[i]).Value });
         }
     }
 }
