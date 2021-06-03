@@ -45,3 +45,10 @@ A full circle of spheres highlight the correct place.
 - [ ] Change Shield System
 - [ ] Improve player movement
 - [ ] Shatter Asteroid when hit by a missile.
+- [ ] Hyperspace jump function was not implemented, I thought it was world wrapping.
+- [ ] UFOs are missing.
+- [ ] Asteroids are not broken apart in smaller ones when hit/shoot.
+- [ ] Asteroids speed doesn't change with size (in original design smaller asteroids move faster than bigger ones).
+- [ ] Asteroids don't re-spawn after you destroy all of them.
+- [ ] Use EntityManager to batch Entities allocation.
+
