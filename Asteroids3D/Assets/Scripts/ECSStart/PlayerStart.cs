@@ -46,7 +46,7 @@ public class PlayerStart : MonoBehaviour
         // Set Camera tracker
         characterTracker.GetComponent<CameraMovement>().SetReceivedEntity(playerInstance);
         // Set Hyperspace Jump
-        manager.SetComponentData(playerInstance, new HyperspaceJumpData
+        manager.SetComponentData(playerInstance, new WarpingData
         {
             isPlayer = true,
             canvasHalfSize = CanvasSpace.CanvasHalfSize()

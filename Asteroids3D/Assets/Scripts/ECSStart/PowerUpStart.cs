@@ -58,7 +58,7 @@ public class PowerUpStart : MonoBehaviour
             manager.AddComponentData(PowerUpInstance, new NonUniformScale { Value = new float3(1, 1, 1) * size });
 
             // Hyperspace Jump Data
-            manager.SetComponentData(PowerUpInstance, new HyperspaceJumpData
+            manager.SetComponentData(PowerUpInstance, new WarpingData
             {
                 isPlayer = false,
                 canvasHalfSize = canvasHalfSize

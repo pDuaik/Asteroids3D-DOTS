@@ -25,7 +25,7 @@ public class PlayerShootingSystem : JobComponentSystem
             .WithStructuralChanges()
             .ForEach((ref PlayerData playerData,
                       ref EntityData entityData,
-                      ref HyperspaceJumpData hyperspaceJumpData,
+                      ref WarpingData hyperspaceJumpData,
                       ref Rotation rotation,
                       ref Translation position) =>
             {
@@ -58,7 +58,7 @@ public class PlayerShootingSystem : JobComponentSystem
     }
 
     private void InstantiateMissile(PlayerData playerData,
-                                    HyperspaceJumpData hyperspaceJumpData,
+                                    WarpingData hyperspaceJumpData,
                                     NativeArray<Entity> asteroidEntities,
                                     Rotation rotation,
                                     Translation position,
@@ -85,7 +85,7 @@ public class PlayerShootingSystem : JobComponentSystem
             missileSpeed = playerData.missileSpeed
         });
         // Set Hyperspace Jump
-        manager.SetComponentData(missileInstance, new HyperspaceJumpData { isPlayer = false, canvasHalfSize = hyperspaceJumpData.canvasHalfSize });
+        manager.SetComponentData(missileInstance, new WarpingData { isPlayer = false, canvasHalfSize = hyperspaceJumpData.canvasHalfSize });
 
         // Populate Dynamic Buffer
         DynamicBuffer<CollisionEntityBufferData> entityBufferDatas = manager.GetBuffer<CollisionEntityBufferData>(missileInstance);

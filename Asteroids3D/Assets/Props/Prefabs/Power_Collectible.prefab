@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d1d2092f21feb418a55984dfdc7cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shield: 0
+  power: 0
 --- !u!114 &1166085415737958162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,8 +106,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7622145679650409300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1df6917ee0c45b14c9a18020648412b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 95db20fcb439d254cae28a99e9858632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
   canvasHalfSize: 0
+  update: 0
+  warpingValue:
+    x: 0
+    y: 0
+    z: 0

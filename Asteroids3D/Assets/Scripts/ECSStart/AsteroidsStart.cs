@@ -89,7 +89,7 @@ public class AsteroidsStart : MonoBehaviour
             });
 
             // Hyperspace Jump Data
-            manager.SetComponentData(asteroidInstance, new HyperspaceJumpData
+            manager.SetComponentData(asteroidInstance, new WarpingData
             {
                 isPlayer = false,
                 canvasHalfSize = canvasHalfSize
