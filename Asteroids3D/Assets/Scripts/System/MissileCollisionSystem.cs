@@ -20,7 +20,7 @@ public class MissileCollisionSystem : JobComponentSystem
                 {
                     try
                     {
-                        if (math.distancesq(float3.zero, position.Value) < 300 * 300)
+                        if (math.distancesq(collisionPositionBufferDatas[i].position, position.Value) < 300 * 300)
                         {
                             missileData.hit = collisionEntityBufferDatas[i].entity;
                             break;

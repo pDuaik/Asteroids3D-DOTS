@@ -84,9 +84,10 @@ public class PlayerShootingSystem : JobComponentSystem
             lifeSpan = playerData.missileLifeSpan,
             missileSpeed = playerData.missileSpeed
         });
-        // Set Hyperspace Jump
-        manager.SetComponentData(missileInstance, new WarpingData { isPlayer = false, canvasHalfSize = hyperspaceJumpData.canvasHalfSize });
+        // Set Warping Data
+        manager.SetComponentData(missileInstance, new WarpingData { isPlayer = false, canvasHalfSize = hyperspaceJumpData.canvasHalfSize, update = true });
 
+        /*
         // Populate Dynamic Buffer
         DynamicBuffer<CollisionEntityBufferData> entityBufferDatas = manager.GetBuffer<CollisionEntityBufferData>(missileInstance);
         DynamicBuffer<CollisionPositionBufferData> positionBufferDatas = manager.GetBuffer<CollisionPositionBufferData>(missileInstance);
@@ -95,5 +96,6 @@ public class PlayerShootingSystem : JobComponentSystem
             entityBufferDatas.Add(new CollisionEntityBufferData { entity = asteroidEntities[i] });
             positionBufferDatas.Add(new CollisionPositionBufferData { position = manager.GetComponentData<Translation>(asteroidEntities[i]).Value });
         }
+        */
     }
 }

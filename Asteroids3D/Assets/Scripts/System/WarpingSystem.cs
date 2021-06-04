@@ -22,49 +22,48 @@ public class WarpingSystem : JobComponentSystem
 
                 if (warpingData.isPlayer)
                 {
-                    // Warp player data.
-                    float3 warpingTemp = float3.zero;
+                    // Save initial position to campare with final result.
+                    float3 latePosition = position.Value;
 
                     if (math.abs(playerPosition.x) > playerArea)
-                        warpingTemp.x -= math.sign(position.Value.x) * canvasSize / 2;
+                        position.Value.x -= math.sign(position.Value.x) * canvasSize / 2;
                     if (math.abs(playerPosition.y) > playerArea)
-                        warpingTemp.y -= math.sign(position.Value.y) * canvasSize / 2;
+                        position.Value.y -= math.sign(position.Value.y) * canvasSize / 2;
                     if (math.abs(playerPosition.z) > playerArea)
-                        warpingTemp.z -= math.sign(position.Value.z) * canvasSize / 2;
+                        position.Value.z -= math.sign(position.Value.z) * canvasSize / 2;
 
-                    // Pass data to entity
-                    warpingData.Value += warpingTemp;
-                    position.Value += warpingTemp;
+                    // Check if something changed.
+                    if (!position.Value.Equals(latePosition))
+                    {
+                        warpingData.update = true;
+                    }
                 }
                 else
                 {
-                    // Warp other entities.
-                    float3 warpingTemp = float3.zero;
+                    // Save initial position to campare with final result.
+                    float3 latePosition = position.Value;
 
+                    // Move entities
                     if (math.abs(playerPosition.x) > playerArea)
-                        warpingTemp.x -= math.sign(playerPosition.x) * canvasSize / 2;
+                        position.Value.x -= math.sign(playerPosition.x) * canvasSize / 2;
                     if (math.abs(playerPosition.y) > playerArea)
-                        warpingTemp.y -= math.sign(playerPosition.y) * canvasSize / 2;
+                        position.Value.y -= math.sign(playerPosition.y) * canvasSize / 2;
                     if (math.abs(playerPosition.z) > playerArea)
-                        warpingTemp.z -= math.sign(playerPosition.z) * canvasSize / 2;
+                        position.Value.z -= math.sign(playerPosition.z) * canvasSize / 2;
 
-                    // Pass data to entity
-                    warpingData.Value += warpingTemp;
-                    position.Value += warpingTemp;
-
-                    // Put other entities inside canvas area.
-                    warpingTemp = float3.zero;
-
+                    // Put entities inside canvas area.
                     if (math.abs(position.Value.x) > canvasSize)
-                        warpingTemp.x -= math.sign(position.Value.x) * canvasSize * 2;
+                        position.Value.x -= math.sign(position.Value.x) * canvasSize * 2;
                     if (math.abs(position.Value.y) > canvasSize)
-                        warpingTemp.y -= math.sign(position.Value.y) * canvasSize * 2;
+                        position.Value.y -= math.sign(position.Value.y) * canvasSize * 2;
                     if (math.abs(position.Value.z) > canvasSize)
-                        warpingTemp.z -= math.sign(position.Value.z) * canvasSize * 2;
+                        position.Value.z -= math.sign(position.Value.z) * canvasSize * 2;
 
-                    // Pass data to entity
-                    warpingData.Value += warpingTemp;
-                    position.Value += warpingTemp;
+                    // Check if something changed.
+                    if (!position.Value.Equals(latePosition))
+                    {
+                        warpingData.update = true;
+                    }
                 }
             })
             .Schedule(inputDeps);
