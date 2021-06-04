@@ -9768,7 +9768,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   canvasHalfSize: 0
-  update: 0
   warpingValue:
     x: 0
     y: 0

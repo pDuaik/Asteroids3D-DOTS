@@ -22,31 +22,49 @@ public class WarpingSystem : JobComponentSystem
 
                 if (warpingData.isPlayer)
                 {
-                    // Warp player.
+                    // Warp player data.
+                    float3 warpingTemp = float3.zero;
+
                     if (math.abs(playerPosition.x) > playerArea)
-                        position.Value.x -= math.sign(position.Value.x) * canvasSize / 2;
+                        warpingTemp.x -= math.sign(position.Value.x) * canvasSize / 2;
                     if (math.abs(playerPosition.y) > playerArea)
-                        position.Value.y -= math.sign(position.Value.y) * canvasSize / 2;
+                        warpingTemp.y -= math.sign(position.Value.y) * canvasSize / 2;
                     if (math.abs(playerPosition.z) > playerArea)
-                        position.Value.z -= math.sign(position.Value.z) * canvasSize / 2;
+                        warpingTemp.z -= math.sign(position.Value.z) * canvasSize / 2;
+
+                    // Pass data to entity
+                    warpingData.Value += warpingTemp;
+                    position.Value += warpingTemp;
                 }
                 else
                 {
                     // Warp other entities.
+                    float3 warpingTemp = float3.zero;
+
                     if (math.abs(playerPosition.x) > playerArea)
-                        position.Value.x -= math.sign(playerPosition.z) * canvasSize / 2;
+                        warpingTemp.x -= math.sign(playerPosition.x) * canvasSize / 2;
                     if (math.abs(playerPosition.y) > playerArea)
-                        position.Value.y -= math.sign(playerPosition.z) * canvasSize / 2;
+                        warpingTemp.y -= math.sign(playerPosition.y) * canvasSize / 2;
                     if (math.abs(playerPosition.z) > playerArea)
-                        position.Value.z -= math.sign(playerPosition.z) * canvasSize / 2;
+                        warpingTemp.z -= math.sign(playerPosition.z) * canvasSize / 2;
+
+                    // Pass data to entity
+                    warpingData.Value += warpingTemp;
+                    position.Value += warpingTemp;
 
                     // Put other entities inside canvas area.
+                    warpingTemp = float3.zero;
+
                     if (math.abs(position.Value.x) > canvasSize)
-                        position.Value.x -= math.sign(position.Value.x) * canvasSize * 2;
+                        warpingTemp.x -= math.sign(position.Value.x) * canvasSize * 2;
                     if (math.abs(position.Value.y) > canvasSize)
-                        position.Value.y -= math.sign(position.Value.y) * canvasSize * 2;
+                        warpingTemp.y -= math.sign(position.Value.y) * canvasSize * 2;
                     if (math.abs(position.Value.z) > canvasSize)
-                        position.Value.z -= math.sign(position.Value.z) * canvasSize * 2;
+                        warpingTemp.z -= math.sign(position.Value.z) * canvasSize * 2;
+
+                    // Pass data to entity
+                    warpingData.Value += warpingTemp;
+                    position.Value += warpingTemp;
                 }
             })
             .Schedule(inputDeps);
