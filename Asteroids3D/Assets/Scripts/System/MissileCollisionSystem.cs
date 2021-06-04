@@ -34,9 +34,6 @@ public class MissileCollisionSystem : JobComponentSystem
             })
             .Schedule(inputDeps);
 
-        // Guarantees the job has completed before schedulling another one.
-        jobHandle.Complete();
-
         return jobHandle;
     }
 }

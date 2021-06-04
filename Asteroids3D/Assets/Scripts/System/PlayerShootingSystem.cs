@@ -1,4 +1,3 @@
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
@@ -25,29 +24,23 @@ public class PlayerShootingSystem : JobComponentSystem
             .WithStructuralChanges()
             .ForEach((ref PlayerData playerData,
                       ref EntityData entityData,
-                      ref WarpingData hyperspaceJumpData,
+                      ref WarpingData warpingData,
                       ref Rotation rotation,
                       ref Translation position) =>
             {
                 // Check if player is shooting
                 if (playerData.currentShootingCooldownTime >= playerData.shootingCooldownTime && shoot)
                 {
-                    // Query for Asteroids
-                    EntityQuery query = GetEntityQuery(typeof(AsteroidData));
-                    NativeArray<Entity> asteroidEntities = query.ToEntityArray(Allocator.TempJob);
-
                     // Reset timer
                     playerData.currentShootingCooldownTime = 0;
 
                     // Instantiate missile
-                    InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, rotation, position, entityData.entity, 0);
+                    InstantiateMissile(playerData, warpingData, rotation, position, entityData.entity, 0);
                     if (playerData.power)
                     {
-                        InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, rotation, position, entityData.entity, -75);
-                        InstantiateMissile(playerData, hyperspaceJumpData, asteroidEntities, rotation, position, entityData.entity, 75);
+                        InstantiateMissile(playerData, warpingData, rotation, position, entityData.entity, -75);
+                        InstantiateMissile(playerData, warpingData, rotation, position, entityData.entity, 75);
                     }
-
-                    asteroidEntities.Dispose();
                 }
 
                 // Add delta time to shooting cooldown timer
@@ -58,8 +51,7 @@ public class PlayerShootingSystem : JobComponentSystem
     }
 
     private void InstantiateMissile(PlayerData playerData,
-                                    WarpingData hyperspaceJumpData,
-                                    NativeArray<Entity> asteroidEntities,
+                                    WarpingData warpingData,
                                     Rotation rotation,
                                     Translation position,
                                     Entity missile,
@@ -85,17 +77,11 @@ public class PlayerShootingSystem : JobComponentSystem
             missileSpeed = playerData.missileSpeed
         });
         // Set Warping Data
-        manager.SetComponentData(missileInstance, new WarpingData { isPlayer = false, canvasHalfSize = hyperspaceJumpData.canvasHalfSize, update = true });
-
-        /*
-        // Populate Dynamic Buffer
-        DynamicBuffer<CollisionEntityBufferData> entityBufferDatas = manager.GetBuffer<CollisionEntityBufferData>(missileInstance);
-        DynamicBuffer<CollisionPositionBufferData> positionBufferDatas = manager.GetBuffer<CollisionPositionBufferData>(missileInstance);
-        for (int i = 0; i < asteroidEntities.Length; i++)
+        manager.SetComponentData(missileInstance, new WarpingData
         {
-            entityBufferDatas.Add(new CollisionEntityBufferData { entity = asteroidEntities[i] });
-            positionBufferDatas.Add(new CollisionPositionBufferData { position = manager.GetComponentData<Translation>(asteroidEntities[i]).Value });
-        }
-        */
+            isPlayer = false,
+            canvasHalfSize = warpingData.canvasHalfSize,
+            update = true
+        });
     }
 }
