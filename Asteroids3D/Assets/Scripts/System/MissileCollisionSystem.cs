@@ -7,6 +7,9 @@ public class MissileCollisionSystem : JobComponentSystem
 {
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
+        var randomCheck = UnityEngine.Random.value;
+        var isOdd = randomCheck > .5f ? true : false;
+
         var jobHandle = Entities
             .WithoutBurst()
             .WithName("MissileCollisionSystem")
@@ -16,7 +19,7 @@ public class MissileCollisionSystem : JobComponentSystem
                       ref DynamicBuffer<CollisionEntityBufferData> collisionEntityBufferDatas,
                       ref DynamicBuffer<CollisionPositionBufferData> collisionPositionBufferDatas) =>
             {
-                for (int i = 0; i < collisionEntityBufferDatas.Length; i++)
+                for (int i = randomCheck > .5f ? 0 : 1 ; i < collisionEntityBufferDatas.Length; i += 2)
                 {
                     try
                     {

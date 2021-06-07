@@ -468,7 +468,7 @@ MonoBehaviour:
   missilePrefab: {fileID: 1558109986609959527, guid: 9e086c56fd9cca24e9d83c30627639a9, type: 3}
   shieldPrefab: {fileID: 251281813179023132, guid: b0cff287974f6f7499dcec1952331a0f, type: 3}
   rotationSpeed: 2
-  acceleration: 1000
+  acceleration: 20
   shootingCooldownTime: 1
   missileLifeSpan: 5
   missileSpeed: 200
