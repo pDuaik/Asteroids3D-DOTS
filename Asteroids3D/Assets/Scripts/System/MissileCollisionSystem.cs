@@ -19,6 +19,7 @@ public class MissileCollisionSystem : JobComponentSystem
                       ref DynamicBuffer<CollisionEntityBufferData> collisionEntityBufferDatas,
                       ref DynamicBuffer<CollisionPositionBufferData> collisionPositionBufferDatas) =>
             {
+                // Performing collision check for only half of the asteroids.
                 for (int i = randomCheck > .5f ? 0 : 1 ; i < collisionEntityBufferDatas.Length; i += 2)
                 {
                     try
